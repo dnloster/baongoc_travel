@@ -127,7 +127,7 @@ const MobileSearchPrompt = () => {
         if (buttonId === "visa") {
             showVisaModal();
         } else if (buttonId === "passport") {
-            window.open("https://baongoctravel.com.vn", "_blank");
+            showPassportModal();
         } else {
             setOpenDialog(buttonId);
         }
@@ -182,6 +182,62 @@ const MobileSearchPrompt = () => {
             },
         }).then((result) => {
             if (result.isConfirmed) {
+                window.open("tel:1900xxxx", "_self");
+            }
+        });
+    };
+
+    const showPassportModal = () => {
+        Swal.fire({
+            title: "📖 DỊCH VỤ SỔ THÔNG HÀNH",
+            html: `
+                <div style="text-align: left; line-height: 1.6;">
+                    <h3 style="color: #1976d2; margin-top: 0;">Bảo Ngọc Travel hỗ trợ làm Sổ thông hành</h3>
+                    <p><strong>📋 Dịch vụ làm hộ chiếu:</strong></p>
+                    <ul style="margin: 10px 0;">
+                        <li>📄 Sổ thông hành phổ thông (48 trang)</li>
+                        <li>📗 Sổ thông hành ngoại giao</li>
+                        <li>📘 Sổ thông hành công vụ</li>
+                        <li>🔄 Gia hạn sổ thông hành</li>
+                        <li>📝 Thay đổi thông tin trong sổ</li>
+                        <li>🆕 Cấp lại khi mất/hỏng</li>
+                    </ul>
+                    <p><strong>⏱️ Thời gian xử lý:</strong></p>
+                    <ul style="margin: 10px 0;">
+                        <li>✅ Thường: 7-10 ngày làm việc</li>
+                        <li>⚡ Gấp: 3-5 ngày làm việc</li>
+                        <li>🚀 Khẩn cấp: 1-2 ngày làm việc</li>
+                    </ul>
+                    <p><strong>🎯 Dịch vụ bao gồm:</strong></p>
+                    <ul style="margin: 10px 0;">
+                        <li>✅ Tư vấn thủ tục miễn phí</li>
+                        <li>✅ Kiểm tra hồ sơ trước khi nộp</li>
+                        <li>✅ Hỗ trợ điền form đăng ký</li>
+                        <li>✅ Nhận hồ sơ tại nhà</li>
+                        <li>✅ Theo dõi tiến độ xử lý</li>
+                        <li>✅ Giao sổ tận nơi</li>
+                    </ul>
+                    <p style="color: #d32f2f; font-weight: bold;">
+                        💰 Phí dịch vụ từ: <span style="color: #2e7d32;">200.000đ</span>
+                    </p>
+                    <p style="color: #1976d2; font-weight: bold;">
+                        📞 Hotline: <a href="tel:1900xxxx" style="color: #1976d2;">1900.xxxx</a>
+                    </p>
+                </div>
+            `,
+            iconHtml: `<img src=${Logo} width="160" />`,
+            confirmButtonText: "Liên hệ ngay",
+            cancelButtonText: "Đóng",
+            showCancelButton: true,
+            confirmButtonColor: "#1976d2",
+            cancelButtonColor: "#757575",
+            width: "600px",
+            customClass: {
+                popup: "visa-modal",
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Chuyển đến trang liên hệ hoặc mở link chat
                 window.open("tel:1900xxxx", "_self");
             }
         });
