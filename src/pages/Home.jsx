@@ -61,10 +61,13 @@ const Home = () => {
             <FeaturedDestinations />
 
             {/* Services Section */}
-            <Box sx={{ py: 10, backgroundColor: "background.default" }}>
-                <Container maxWidth="lg">
+            <Box sx={{ py: { xs: 6, md: 10 }, backgroundColor: "background.default" }}>
+                <Container 
+                    maxWidth="lg"
+                    sx={{ px: { xs: 1, sm: 2, md: 3 } }}
+                >
                     {/* Header */}
-                    <Box textAlign="center" sx={{ mb: 8 }}>
+                    <Box textAlign="center" sx={{ mb: { xs: 6, md: 8 } }}>
                         <Typography
                             variant="h3"
                             component="h2"
@@ -76,14 +79,14 @@ const Home = () => {
                                 WebkitBackgroundClip: "text",
                                 WebkitTextFillColor: "transparent",
                                 mb: 2,
-                                fontSize: { xs: "2rem", md: "3rem" },
+                                fontSize: { xs: "1.8rem", sm: "2.2rem", md: "3rem" },
                             }}
                         >
                             Dịch vụ của chúng tôi
                         </Typography>
                         <Box
                             sx={{
-                                width: 80,
+                                width: { xs: 60, md: 80 },
                                 height: 4,
                                 backgroundColor: "primary.main",
                                 mx: "auto",
@@ -98,7 +101,8 @@ const Home = () => {
                                 maxWidth: 600,
                                 mx: "auto",
                                 lineHeight: 1.8,
-                                fontSize: "1.1rem",
+                                fontSize: { xs: "0.95rem", md: "1.1rem" },
+                                px: { xs: 2, sm: 0 },
                             }}
                         >
                             Chúng tôi cung cấp đầy đủ các dịch vụ du lịch chất
@@ -107,28 +111,36 @@ const Home = () => {
                     </Box>
 
                     {/* Services Grid */}
-                    <Grid container spacing={4}>
+                    <Grid container spacing={{ xs: 3, sm: 4 }} sx={{ alignItems: "stretch" }}>
                         {services.map((service, index) => (
-                            <Grid item xs={12} sm={6} md={3} key={index}>
+                            <Grid item xs={12} sm={6} md={3} key={index} sx={{ display: "flex" }}>
                                 <Card
                                     sx={{
                                         height: "100%",
+                                        width: "100%",
+                                        display: "flex",
+                                        flexDirection: "column",
                                         textAlign: "center",
-                                        borderRadius: 3,
+                                        borderRadius: { xs: 2, md: 3 },
                                         border: "1px solid",
                                         borderColor: "divider",
                                         transition:
                                             "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                                         position: "relative",
                                         overflow: "hidden",
+                                        minHeight: { xs: "280px", sm: "320px", md: "350px" },
                                         "&:hover": {
-                                            transform: "translateY(-8px)",
-                                            boxShadow:
-                                                "0 20px 40px rgba(102, 126, 234, 0.15)",
+                                            transform: { xs: "translateY(-4px)", md: "translateY(-8px)" },
+                                            boxShadow: {
+                                                xs: "0 8px 25px rgba(102, 126, 234, 0.1)",
+                                                md: "0 20px 40px rgba(102, 126, 234, 0.15)"
+                                            },
                                             borderColor: "primary.main",
                                             "& .service-icon": {
-                                                transform:
-                                                    "scale(1.1) rotate(5deg)",
+                                                transform: { 
+                                                    xs: "scale(1.05)", 
+                                                    md: "scale(1.1) rotate(5deg)" 
+                                                },
                                                 color: "primary.main",
                                             },
                                             "& .service-bg": {
@@ -144,7 +156,7 @@ const Home = () => {
                                             height: 4,
                                             background:
                                                 "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                                            borderRadius: "12px 12px 0 0",
+                                            borderRadius: { xs: "8px 8px 0 0", md: "12px 12px 0 0" },
                                         },
                                     }}
                                 >
@@ -167,25 +179,32 @@ const Home = () => {
 
                                     <CardContent
                                         sx={{
-                                            p: 4,
+                                            p: { xs: 3, md: 4 },
                                             position: "relative",
                                             zIndex: 1,
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            flex: 1,
+                                            height: "100%",
                                         }}
                                     >
                                         {/* Icon container */}
                                         <Box
                                             sx={{
-                                                mb: 3,
+                                                mb: { xs: 2, md: 3 },
                                                 display: "flex",
                                                 justifyContent: "center",
                                                 alignItems: "center",
-                                                width: 80,
-                                                height: 80,
+                                                width: { xs: 64, md: 80 },
+                                                height: { xs: 64, md: 80 },
                                                 mx: "auto",
                                                 borderRadius: "50%",
                                                 backgroundColor:
                                                     "rgba(102, 126, 234, 0.1)",
                                                 border: "2px solid rgba(102, 126, 234, 0.2)",
+                                                flexShrink: 0,
                                             }}
                                         >
                                             <Box
@@ -194,7 +213,7 @@ const Home = () => {
                                                     color: "text.secondary",
                                                     transition:
                                                         "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                                                    fontSize: "2.5rem",
+                                                    fontSize: { xs: "2rem", md: "2.5rem" },
                                                 }}
                                             >
                                                 {service.icon}
@@ -206,9 +225,15 @@ const Home = () => {
                                             component="h3"
                                             sx={{
                                                 fontWeight: "bold",
-                                                mb: 2,
+                                                mb: { xs: 1.5, md: 2 },
                                                 color: "text.primary",
-                                                fontSize: "1.3rem",
+                                                fontSize: { xs: "1.1rem", md: "1.3rem" },
+                                                textAlign: "center",
+                                                minHeight: { xs: "2.2rem", md: "2.6rem" },
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                flexShrink: 0,
                                             }}
                                         >
                                             {service.title}
@@ -219,7 +244,12 @@ const Home = () => {
                                             color="text.secondary"
                                             sx={{
                                                 lineHeight: 1.6,
-                                                fontSize: "0.95rem",
+                                                fontSize: { xs: "0.85rem", md: "0.95rem" },
+                                                textAlign: "center",
+                                                flex: 1,
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
                                             }}
                                         >
                                             {service.description}
@@ -231,19 +261,25 @@ const Home = () => {
                     </Grid>
 
                     {/* Call to Action */}
-                    <Box textAlign="center" sx={{ mt: 8 }}>
+                    <Box textAlign="center" sx={{ mt: { xs: 6, md: 8 } }}>
                         <Typography
                             variant="h6"
-                            sx={{ mb: 3, color: "text.secondary" }}
+                            sx={{ 
+                                mb: 3, 
+                                color: "text.secondary",
+                                fontSize: { xs: "1rem", md: "1.25rem" },
+                                px: { xs: 2, sm: 0 }
+                            }}
                         >
                             Sẵn sàng cho chuyến phiêu lưu tiếp theo?
                         </Typography>
                         <Box
                             sx={{
                                 display: "flex",
-                                gap: 2,
+                                gap: { xs: 1.5, md: 2 },
                                 justifyContent: "center",
                                 flexWrap: "wrap",
+                                px: { xs: 2, sm: 0 },
                             }}
                         >
                             <Typography
@@ -252,14 +288,14 @@ const Home = () => {
                                 href="/tours"
                                 sx={{
                                     textDecoration: "none",
-                                    px: 4,
-                                    py: 1.5,
+                                    px: { xs: 3, md: 4 },
+                                    py: { xs: 1.2, md: 1.5 },
                                     borderRadius: 3,
                                     background:
                                         "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                                     color: "white",
                                     fontWeight: "bold",
-                                    fontSize: "1rem",
+                                    fontSize: { xs: "0.9rem", md: "1rem" },
                                     textTransform: "none",
                                     transition:
                                         "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
@@ -281,14 +317,14 @@ const Home = () => {
                                 href="/about"
                                 sx={{
                                     textDecoration: "none",
-                                    px: 4,
-                                    py: 1.5,
+                                    px: { xs: 3, md: 4 },
+                                    py: { xs: 1.2, md: 1.5 },
                                     borderRadius: 3,
                                     border: "2px solid",
                                     borderColor: "primary.main",
                                     color: "primary.main",
                                     fontWeight: "bold",
-                                    fontSize: "1rem",
+                                    fontSize: { xs: "0.9rem", md: "1rem" },
                                     textTransform: "none",
                                     transition:
                                         "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
