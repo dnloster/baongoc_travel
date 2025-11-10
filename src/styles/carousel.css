@@ -1,0 +1,123 @@
+/* Custom Swiper Carousel Styles */
+
+/* Hero Swiper Container */
+.hero-swiper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Pagination styling */
+.hero-swiper .swiper-pagination {
+    position: absolute;
+    bottom: 30px !important;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.hero-swiper .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-swiper .swiper-pagination-bullet-active {
+    background-color: white;
+    transform: scale(1.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.hero-swiper .swiper-pagination-bullet:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.1);
+}
+
+/* Custom Navigation Arrows */
+.hero-swiper .swiper-button-prev,
+.hero-swiper .swiper-button-next {
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+/* Hide default arrow content */
+.hero-swiper .swiper-button-prev::after,
+.hero-swiper .swiper-button-next::after {
+    display: none;
+}
+
+/* Slide content animations */
+.hero-swiper .swiper-slide {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.hero-swiper .swiper-slide-active {
+    opacity: 1;
+}
+
+/* Text animation for active slide */
+.hero-swiper .swiper-slide-active h1 {
+    animation: slideInFromLeft 1s ease-out;
+}
+
+.hero-swiper .swiper-slide-active h5 {
+    animation: slideInFromLeft 1s ease-out 0.2s both;
+}
+
+.hero-swiper .swiper-slide-active button {
+    animation: slideInFromLeft 1s ease-out 0.4s both;
+}
+
+/* Keyframes for animations */
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .hero-swiper .swiper-button-prev,
+    .hero-swiper .swiper-button-next {
+        display: none !important;
+    }
+
+    .hero-swiper .swiper-pagination {
+        bottom: 20px !important;
+    }
+
+    .hero-swiper .swiper-pagination-bullet {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+    }
+
+    .hero-swiper .swiper-pagination-bullet-active {
+        transform: scale(1.2);
+    }
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+    .hero-swiper .swiper-pagination-bullet:active {
+        background-color: white;
+        transform: scale(1.2);
+    }
+}
