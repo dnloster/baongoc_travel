@@ -164,6 +164,13 @@ const Header = () => {
                                     isHomePage && !isScrolled
                                         ? "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
                                         : "none",
+                                maxWidth: {
+                                    xs: "120px",
+                                    sm: "160px", 
+                                    md: isHomePage && !isScrolled ? "280px" : "220px"
+                                },
+                                width: "auto",
+                                height: "auto"
                             }}
                         />
                     </Box>
@@ -183,9 +190,14 @@ const Header = () => {
                                     component={Link}
                                     to={item.path}
                                     sx={{
-                                        mx: 1,
+                                        mx: { xs: 0.5, md: 1 },
+                                        px: { xs: 1, md: 2 },
+                                        py: { xs: 0.5, md: 1 },
+                                        fontSize: { xs: "0.8rem", md: "0.9rem" },
                                         color: isActivePath(item.path)
-                                            ? "primary.main"
+                                            ? isHomePage && !isScrolled
+                                                ? "#FFD700" // Vàng nổi bật trên carousel
+                                                : "primary.main"
                                             : isHomePage && !isScrolled
                                             ? "white"
                                             : "text.primary",
@@ -196,6 +208,12 @@ const Header = () => {
                                             isHomePage && !isScrolled
                                                 ? "1px 1px 2px rgba(0,0,0,0.5)"
                                                 : "none",
+                                        backgroundColor: isActivePath(item.path) && isHomePage && !isScrolled
+                                            ? "rgba(255, 215, 0, 0.2)"
+                                            : "transparent",
+                                        borderRadius: isActivePath(item.path) && isHomePage && !isScrolled
+                                            ? 1
+                                            : 0,
                                         "&:hover": {
                                             backgroundColor: "primary.light",
                                             color: "white",

@@ -5,7 +5,6 @@ import {
     Box,
     Grid,
     Card,
-    CardContent,
     List,
     ListItem,
     ListItemIcon,
@@ -19,7 +18,6 @@ import {
     AccessTime as TimeIcon,
     Facebook as FacebookIcon,
     Instagram as InstagramIcon,
-    Twitter as TwitterIcon,
 } from "@mui/icons-material";
 
 const About = () => {
@@ -51,31 +49,82 @@ const About = () => {
     ];
 
     return (
-        <Container maxWidth="lg" sx={{ py: 4 }}>
+        <Container 
+            maxWidth="lg" 
+            sx={{ 
+                py: { xs: 2, md: 4 },
+                px: { xs: 1, sm: 2, md: 3 }
+            }}
+        >
             {/* Header */}
-            <Box textAlign="center" sx={{ mb: 6 }}>
-                <Typography variant="h3" component="h1" gutterBottom>
+            <Box textAlign="center" sx={{ mb: { xs: 4, md: 6 } }}>
+                <Typography 
+                    variant="h3" 
+                    component="h1" 
+                    gutterBottom
+                    sx={{
+                        fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
+                        fontWeight: "bold",
+                        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        backgroundClip: "text",
+                        WebkitBackgroundClip: "text", 
+                        WebkitTextFillColor: "transparent",
+                    }}
+                >
                     Về chúng tôi
                 </Typography>
-                <Typography variant="h6" color="text.secondary">
+                <Typography 
+                    variant="h6" 
+                    color="text.secondary"
+                    sx={{
+                        fontSize: { xs: "1rem", md: "1.25rem" },
+                        px: { xs: 2, sm: 0 },
+                        lineHeight: 1.6,
+                    }}
+                >
                     Bảo Ngọc Travel - Đối tác tin cậy cho mọi chuyến đi
                 </Typography>
             </Box>
 
             {/* Company Story */}
-            <Grid container spacing={4} sx={{ mb: 6 }}>
+            <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mb: { xs: 4, md: 6 } }}>
                 <Grid item xs={12} md={6}>
-                    <Typography variant="h4" gutterBottom>
+                    <Typography 
+                        variant="h4" 
+                        gutterBottom
+                        sx={{
+                            fontSize: { xs: "1.5rem", md: "2.125rem" },
+                            fontWeight: "bold",
+                            mb: { xs: 2, md: 3 },
+                        }}
+                    >
                         Câu chuyện của chúng tôi
                     </Typography>
-                    <Typography variant="body1" paragraph>
+                    <Typography 
+                        variant="body1" 
+                        paragraph
+                        sx={{
+                            fontSize: { xs: "0.95rem", md: "1rem" },
+                            lineHeight: { xs: 1.6, md: 1.7 },
+                            textAlign: "justify",
+                        }}
+                    >
                         Bảo Ngọc Travel được thành lập vào năm 2015 với sứ mệnh
                         mang đến những trải nghiệm du lịch tuyệt vời và đáng nhớ
                         cho mọi khách hàng. Chúng tôi tin rằng du lịch không chỉ
                         là việc di chuyển từ nơi này đến nơi khác, mà là cơ hội
                         để khám phá, học hỏi và tạo ra những kỷ niệm đẹp.
                     </Typography>
-                    <Typography variant="body1" paragraph>
+                    <Typography 
+                        variant="body1" 
+                        paragraph
+                        sx={{
+                            fontSize: { xs: "0.95rem", md: "1rem" },
+                            lineHeight: { xs: 1.6, md: 1.7 },
+                            textAlign: "justify",
+                            mb: { xs: 2, md: 3 },
+                        }}
+                    >
                         Với đội ngũ nhân viên giàu kinh nghiệm và tâm huyết,
                         chúng tôi đã phục vụ hàng nghìn khách hàng và nhận được
                         nhiều phản hồi tích cực. Chúng tôi luôn cam kết cung cấp
@@ -87,10 +136,12 @@ const About = () => {
                         component="img"
                         sx={{
                             width: "100%",
+                            height: { xs: 200, md: 300 },
                             objectFit: "cover",
-                            borderRadius: 2,
+                            borderRadius: { xs: 1, md: 2 },
+                            boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
                         }}
-                        src="/assets/images/office2.jpg"
+                        src="/images/office2.jpg"
                         alt="Đội ngũ Bảo Ngọc Travel"
                     />
                 </Grid>

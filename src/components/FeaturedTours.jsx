@@ -17,7 +17,6 @@ import {
     LocationOn as LocationIcon,
     AccessTime as TimeIcon,
     AttachMoney as MoneyIcon,
-    Star as StarIcon,
     People as PeopleIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
@@ -133,11 +132,17 @@ const FeaturedTours = ({
     const displayTours = tours || defaultTours;
 
     const content = (
-        <Container maxWidth="lg">
+        <Container 
+            maxWidth="lg" 
+            sx={{ 
+                px: { xs: 1, sm: 2, md: 3 },
+                py: { xs: 2, md: 4 }
+            }}
+        >
             {/* Header Section */}
             <Box
                 textAlign="center"
-                sx={{ mb: { xs: 4, md: 6 }, px: { xs: 2, sm: 0 } }}
+                sx={{ mb: { xs: 4, md: 6 }, px: { xs: 1, sm: 0 } }}
             >
                 <Typography
                     variant="h3"
@@ -151,7 +156,11 @@ const FeaturedTours = ({
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         mb: 2,
-                        fontSize: { xs: "1.8rem", sm: "2.2rem", md: "3rem" },
+                        fontSize: { 
+                            xs: "1.5rem", 
+                            sm: "1.8rem", 
+                            md: "3rem" 
+                        },
                     }}
                 >
                     {title}
@@ -164,7 +173,7 @@ const FeaturedTours = ({
                         maxWidth: { xs: "100%", md: 600 },
                         mx: "auto",
                         lineHeight: 1.6,
-                        fontSize: { xs: "1rem", md: "1.25rem" },
+                        fontSize: { xs: "0.9rem", sm: "1rem", md: "1.25rem" },
                         px: { xs: 2, sm: 0 },
                     }}
                 >
@@ -185,7 +194,10 @@ const FeaturedTours = ({
             <Grid
                 container
                 spacing={{ xs: 2, sm: 3, md: 4 }}
-                sx={{ px: { xs: 2, sm: 0 } }}
+                sx={{ 
+                    px: { xs: 0, sm: 0 },
+                    mt: { xs: 2, md: 4 }
+                }}
             >
                 {displayTours.map((tour) => (
                     <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={tour.id}>
@@ -193,15 +205,20 @@ const FeaturedTours = ({
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
-                                borderRadius: 3,
+                                borderRadius: { xs: 2, md: 3 },
                                 overflow: "hidden",
                                 transition:
                                     "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                                 "&:hover": {
-                                    transform: "translateY(-8px)",
-                                    boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+                                    transform: { xs: "none", md: "translateY(-8px)" },
+                                    boxShadow: { 
+                                        xs: "0 8px 25px rgba(0,0,0,0.08)", 
+                                        md: "0 20px 40px rgba(0,0,0,0.12)" 
+                                    },
                                 },
                                 position: "relative",
+                                height: "100%",
+                                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
                             }}
                         >
                             {/* Discount Badge */}
@@ -212,11 +229,11 @@ const FeaturedTours = ({
                                     size="small"
                                     sx={{
                                         position: "absolute",
-                                        top: 12,
-                                        left: 12,
+                                        top: { xs: 8, md: 12 },
+                                        left: { xs: 8, md: 12 },
                                         zIndex: 2,
                                         fontWeight: "bold",
-                                        fontSize: "0.75rem",
+                                        fontSize: { xs: "0.7rem", md: "0.75rem" },
                                     }}
                                 />
                             )}
@@ -228,12 +245,13 @@ const FeaturedTours = ({
                                 size="small"
                                 sx={{
                                     position: "absolute",
-                                    top: 12,
-                                    right: 12,
+                                    top: { xs: 8, md: 12 },
+                                    right: { xs: 8, md: 12 },
                                     zIndex: 2,
                                     backgroundColor: "rgba(255,255,255,0.9)",
                                     color: "primary.main",
                                     fontWeight: 600,
+                                    fontSize: { xs: "0.7rem", md: "0.75rem" },
                                 }}
                             />
 
@@ -248,7 +266,7 @@ const FeaturedTours = ({
                                     transition: "transform 0.3s ease",
                                     height: { xs: 180, sm: 200, md: 220 },
                                     "&:hover": {
-                                        transform: "scale(1.05)",
+                                        transform: { xs: "none", md: "scale(1.05)" },
                                     },
                                 }}
                             />
@@ -256,7 +274,7 @@ const FeaturedTours = ({
                             <CardContent
                                 sx={{
                                     flex: 1,
-                                    p: { xs: 2, sm: 2.5, md: 3 },
+                                    p: { xs: 1.5, sm: 2.5, md: 3 },
                                     display: "flex",
                                     flexDirection: "column",
                                 }}
@@ -265,11 +283,11 @@ const FeaturedTours = ({
                                 <Box
                                     display="flex"
                                     alignItems="center"
-                                    sx={{ mb: 1.5 }}
+                                    sx={{ mb: { xs: 1, md: 1.5 } }}
                                 >
                                     <LocationIcon
                                         sx={{
-                                            fontSize: 16,
+                                            fontSize: { xs: 14, md: 16 },
                                             color: "text.secondary",
                                             mr: 0.5,
                                         }}
@@ -277,6 +295,7 @@ const FeaturedTours = ({
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
+                                        sx={{ fontSize: { xs: "0.75rem", md: "0.875rem" } }}
                                     >
                                         {tour.location}
                                     </Typography>
@@ -289,11 +308,12 @@ const FeaturedTours = ({
                                     className="truncate-2-lines"
                                     sx={{
                                         fontWeight: "bold",
-                                        mb: 1.5,
-                                        height: { xs: "2.8rem", md: "3.2rem" },
+                                        mb: { xs: 1, md: 1.5 },
+                                        height: { xs: "2.6rem", md: "3.2rem" },
                                         lineHeight: 1.3,
                                         fontSize: {
-                                            xs: "1.1rem",
+                                            xs: "0.95rem",
+                                            sm: "1.1rem",
                                             md: "1.25rem",
                                         },
                                     }}
@@ -305,18 +325,24 @@ const FeaturedTours = ({
                                 <Box
                                     display="flex"
                                     alignItems="center"
-                                    sx={{ mb: 1.5 }}
+                                    sx={{ mb: { xs: 1, md: 1.5 } }}
                                 >
                                     <Rating
                                         value={tour.rating}
                                         precision={0.1}
                                         size="small"
                                         readOnly
-                                        sx={{ mr: 1 }}
+                                        sx={{ 
+                                            mr: 1,
+                                            fontSize: { xs: "1rem", md: "1.2rem" }
+                                        }}
                                     />
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
+                                        sx={{ 
+                                            fontSize: { xs: "0.75rem", md: "0.875rem" }
+                                        }}
                                     >
                                         {tour.rating} ({tour.reviews} đánh giá)
                                     </Typography>
@@ -328,37 +354,41 @@ const FeaturedTours = ({
                                     color="text.secondary"
                                     className="truncate-3-lines mobile-hidden sm-visible"
                                     sx={{
-                                        mb: 2,
+                                        mb: { xs: 1.5, md: 2 },
                                         lineHeight: 1.5,
-                                        height: { xs: "3.6rem", md: "4.5rem" },
+                                        height: { xs: "3rem", md: "4.5rem" },
                                         fontSize: {
-                                            xs: "0.85rem",
+                                            xs: "0.8rem",
                                             md: "0.875rem",
                                         },
+                                        display: { xs: "none", sm: "block" }
                                     }}
                                 >
                                     {tour.description}
                                 </Typography>
 
-                                <Divider sx={{ my: 1.5 }} />
+                                <Divider sx={{ my: { xs: 1, md: 1.5 } }} />
 
                                 {/* Tour Info */}
-                                <Box sx={{ mb: 2 }}>
+                                <Box sx={{ mb: { xs: 1.5, md: 2 } }}>
                                     <Box
                                         display="flex"
                                         alignItems="center"
-                                        sx={{ mb: 1 }}
+                                        sx={{ mb: { xs: 0.5, md: 1 } }}
                                     >
                                         <TimeIcon
                                             sx={{
-                                                fontSize: 16,
+                                                fontSize: { xs: 14, md: 16 },
                                                 color: "primary.main",
                                                 mr: 1,
                                             }}
                                         />
                                         <Typography
                                             variant="body2"
-                                            sx={{ fontWeight: 500 }}
+                                            sx={{ 
+                                                fontWeight: 500,
+                                                fontSize: { xs: "0.8rem", md: "0.875rem" }
+                                            }}
                                         >
                                             {tour.duration}
                                         </Typography>
@@ -366,14 +396,17 @@ const FeaturedTours = ({
                                     <Box display="flex" alignItems="center">
                                         <PeopleIcon
                                             sx={{
-                                                fontSize: 16,
+                                                fontSize: { xs: 14, md: 16 },
                                                 color: "primary.main",
                                                 mr: 1,
                                             }}
                                         />
                                         <Typography
                                             variant="body2"
-                                            sx={{ fontWeight: 500 }}
+                                            sx={{ 
+                                                fontWeight: 500,
+                                                fontSize: { xs: "0.8rem", md: "0.875rem" }
+                                            }}
                                         >
                                             Tối đa {tour.maxGuests} người
                                         </Typography>
@@ -389,6 +422,7 @@ const FeaturedTours = ({
                                                 textDecoration: "line-through",
                                                 color: "text.secondary",
                                                 mb: 0.5,
+                                                fontSize: { xs: "0.75rem", md: "0.875rem" }
                                             }}
                                         >
                                             {Number(
@@ -400,7 +434,7 @@ const FeaturedTours = ({
                                     <Box display="flex" alignItems="center">
                                         <MoneyIcon
                                             sx={{
-                                                fontSize: 18,
+                                                fontSize: { xs: 16, md: 18 },
                                                 color: "success.main",
                                                 mr: 0.5,
                                             }}
@@ -410,7 +444,10 @@ const FeaturedTours = ({
                                             sx={{
                                                 fontWeight: "bold",
                                                 color: "success.main",
-                                                fontSize: "1.3rem",
+                                                fontSize: { 
+                                                    xs: "1.1rem", 
+                                                    md: "1.3rem" 
+                                                },
                                             }}
                                         >
                                             {Number(
@@ -423,8 +460,8 @@ const FeaturedTours = ({
                             </CardContent>
 
                             <CardActions
-                                sx={{
-                                    p: { xs: 2, sm: 2.5, md: 3 },
+                                sx={{ 
+                                    p: { xs: 1.5, md: 2 }, 
                                     pt: 0,
                                     flexDirection: { xs: "column", sm: "row" },
                                     gap: { xs: 1, sm: 0 },
@@ -443,7 +480,8 @@ const FeaturedTours = ({
                                         flex: 1,
                                         mr: { xs: 0, sm: 1 },
                                         width: { xs: "100%", sm: "auto" },
-                                        fontSize: { xs: "0.9rem", md: "1rem" },
+                                        fontSize: { xs: "0.85rem", md: "1rem" },
+                                        py: { xs: 1, md: 1.2 }
                                     }}
                                 >
                                     <span className="mobile-hidden sm-visible">
@@ -462,7 +500,8 @@ const FeaturedTours = ({
                                         borderRadius: 2,
                                         flex: 1,
                                         width: { xs: "100%", sm: "auto" },
-                                        fontSize: { xs: "0.9rem", md: "1rem" },
+                                        fontSize: { xs: "0.85rem", md: "1rem" },
+                                        py: { xs: 1, md: 1.2 },
                                         background:
                                             "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                                         "&:hover": {

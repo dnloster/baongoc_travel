@@ -239,14 +239,19 @@ const FeaturedDestinations = () => {
     return (
         <Box
             sx={{
-                py: 8,
+                py: { xs: 6, md: 8 },
                 backgroundColor: "#f8f9fa",
                 mt: { xs: 0, md: 0 }, // Remove negative margin on mobile since no overlapping search box
             }}
         >
-            <Container maxWidth="lg">
+            <Container 
+                maxWidth="lg"
+                sx={{ 
+                    px: { xs: 1, sm: 2, md: 3 }
+                }}
+            >
                 {/* Header */}
-                <Box textAlign="center" sx={{ mb: 6 }}>
+                <Box textAlign="center" sx={{ mb: { xs: 4, md: 6 } }}>
                     <Typography
                         variant="h3"
                         component="h2"
@@ -254,14 +259,18 @@ const FeaturedDestinations = () => {
                             fontWeight: "bold",
                             color: "#2563eb",
                             mb: 2,
-                            fontSize: { xs: "2rem", md: "3rem" },
+                            fontSize: { 
+                                xs: "1.5rem", 
+                                sm: "1.8rem",
+                                md: "3rem" 
+                            },
                         }}
                     >
                         ĐIỂM ĐẾN YÊU THÍCH
                     </Typography>
                     <Box
                         sx={{
-                            width: 80,
+                            width: { xs: 60, md: 80 },
                             height: 3,
                             backgroundColor: "#2563eb",
                             mx: "auto",
@@ -272,10 +281,12 @@ const FeaturedDestinations = () => {
                         variant="body1"
                         color="text.secondary"
                         sx={{
+                            color: "text.secondary",
                             maxWidth: 700,
                             mx: "auto",
                             lineHeight: 1.8,
-                            fontSize: "1.1rem",
+                            fontSize: { xs: "0.9rem", md: "1.1rem" },
+                            px: { xs: 2, md: 0 }
                         }}
                     >
                         Hãy chọn một điểm đến du lịch nổi tiếng dưới đây để khám
@@ -285,7 +296,7 @@ const FeaturedDestinations = () => {
                 </Box>
 
                 {/* Tabs */}
-                <Box sx={{ mb: 4 }}>
+                <Box sx={{ mb: { xs: 3, md: 4 } }}>
                     <Tabs
                         value={selectedTab}
                         onChange={handleTabChange}
@@ -298,9 +309,10 @@ const FeaturedDestinations = () => {
                             "& .MuiTab-root": {
                                 textTransform: "none",
                                 fontWeight: 600,
-                                fontSize: "1rem",
+                                fontSize: { xs: "0.8rem", md: "1rem" },
                                 color: "text.secondary",
-                                minWidth: 120,
+                                minWidth: { xs: 80, md: 120 },
+                                px: { xs: 1, md: 2 },
                                 "&:hover": {
                                     color: "#2563eb",
                                 },
@@ -332,8 +344,8 @@ const FeaturedDestinations = () => {
                             md: "1fr 1fr 1fr",
                             lg: "1fr 1fr 1fr 1fr",
                         },
-                        gap: 2,
-                        gridAutoRows: "200px",
+                        gap: { xs: 1.5, md: 2 },
+                        gridAutoRows: { xs: "180px", md: "200px" },
                     }}
                 >
                     {getCurrentDestinations().map((destination) => {
@@ -419,12 +431,12 @@ const FeaturedDestinations = () => {
                                             textShadow:
                                                 "2px 2px 8px rgba(0,0,0,0.5)",
                                             fontSize: {
-                                                xs: "1.2rem",
-                                                sm: "1.4rem",
+                                                xs: destination.size === "large" ? "1.4rem" : "1.1rem",
+                                                sm: destination.size === "large" ? "1.6rem" : "1.3rem",
                                                 md:
                                                     destination.size === "large"
                                                         ? "2rem"
-                                                        : "1.3rem",
+                                                        : "1.4rem",
                                             },
                                             letterSpacing: 2,
                                             transition: "all 0.3s ease",

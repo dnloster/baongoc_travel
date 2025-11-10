@@ -1,6 +1,4 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import React, { useState, useEffect } from "react";
 import {
     Box,
     Container,
@@ -12,15 +10,9 @@ import {
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import "../styles/carousel.css";
-
 const HeroCarousel = () => {
     const navigate = useNavigate();
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     const heroSlides = [
         {
@@ -97,68 +89,88 @@ const HeroCarousel = () => {
         },
     ];
 
+    // Auto slide functionality
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, [heroSlides.length]);
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => 
+            prev === 0 ? heroSlides.length - 1 : prev - 1
+        );
+    };
+
+    const goToSlide = (index) => {
+        setCurrentSlide(index);
+    };
+
     return (
         <Box
             sx={{
                 position: "relative",
                 height: { xs: "100vh", md: "600px" },
                 overflow: "hidden",
+                width: "100vw",
+                left: "50%",
+                right: "50%",
+                marginLeft: "-50vw",
+                marginRight: "-50vw",
             }}
         >
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay, EffectFade]}
-                spaceBetween={0}
-                slidesPerView={1}
-                navigation={{
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
+            {/* Carousel Container */}
+            <Box
+                sx={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
                 }}
-                pagination={{
-                    clickable: true,
-                    bulletClass: "swiper-pagination-bullet",
-                    bulletActiveClass: "swiper-pagination-bullet-active",
-                }}
-                // autoplay={{
-                //     delay: 5000,
-                //     disableOnInteraction: false,
-                //     pauseOnMouseEnter: true,
-                // }}
-                effect="fade"
-                fadeEffect={{
-                    crossFade: true,
-                }}
-                speed={800}
-                loop={true}
-                className="hero-swiper"
-                style={{ height: "100%" }}
             >
-                {heroSlides.map((slide) => (
-                    <SwiperSlide key={slide.id}>
-                        <Box
-                            sx={{
-                                height: { xs: "100vh", md: "600px" },
-                                display: "flex",
-                                alignItems: "center",
-                                color: "white",
-                                position: "relative",
-                                backgroundImage: `url(${slide.image})`,
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                "&::before": {
-                                    content: '""',
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    backgroundColor: "rgba(0,0,0,0.4)",
-                                    zIndex: 1,
-                                },
-                            }}
-                        >
-                            <Container
+                {heroSlides.map((slide, index) => (
+                    <Box
+                        key={slide.id}
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            color: "white",
+                            backgroundImage: `url(${slide.image})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            opacity: index === currentSlide ? 1 : 0,
+                            visibility: index === currentSlide ? "visible" : "hidden",
+                            transition: "opacity 0.8s ease-in-out, visibility 0.8s ease-in-out",
+                            "&::before": {
+                                content: '""',
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                backgroundColor: "rgba(0,0,0,0.4)",
+                                zIndex: 1,
+                            },
+                        }}
+                    >
+                                <Container
                                 maxWidth="lg"
-                                sx={{ position: "relative", zIndex: 2 }}
+                                sx={{ 
+                                    position: "relative", 
+                                    zIndex: 2, 
+                                    userSelect: "none",
+                                    px: { xs: 2, sm: 3, md: 4 }
+                                }}
                             >
                                 <Grid container spacing={4} alignItems="center">
                                     <Grid item xs={12} md={8}>
@@ -169,12 +181,14 @@ const HeroCarousel = () => {
                                             sx={{
                                                 fontWeight: "bold",
                                                 fontSize: {
-                                                    xs: "2.5rem",
+                                                    xs: "1.8rem",
+                                                    sm: "2.2rem",
                                                     md: "3.5rem",
                                                 },
                                                 textShadow:
                                                     "2px 2px 4px rgba(0,0,0,0.5)",
-                                                marginBottom: 2,
+                                                marginBottom: { xs: 1, md: 2 },
+                                                lineHeight: { xs: 1.2, md: 1.1 }
                                             }}
                                         >
                                             {slide.title}
@@ -184,13 +198,15 @@ const HeroCarousel = () => {
                                             paragraph
                                             sx={{
                                                 fontSize: {
-                                                    xs: "1.2rem",
+                                                    xs: "1rem",
+                                                    sm: "1.1rem",
                                                     md: "1.5rem",
                                                 },
                                                 textShadow:
                                                     "1px 1px 2px rgba(0,0,0,0.5)",
-                                                marginBottom: 3,
-                                                lineHeight: 1.4,
+                                                marginBottom: { xs: 2, md: 3 },
+                                                lineHeight: { xs: 1.4, md: 1.4 },
+                                                display: { xs: "none", sm: "block" }
                                             }}
                                         >
                                             {slide.subtitle}
@@ -210,9 +226,9 @@ const HeroCarousel = () => {
                                                     boxShadow:
                                                         "0 8px 25px rgba(0,0,0,0.3)",
                                                 },
-                                                px: 4,
-                                                py: 1.5,
-                                                fontSize: "1.1rem",
+                                                px: { xs: 2, md: 4 },
+                                                py: { xs: 1, md: 1.5 },
+                                                fontSize: { xs: "0.9rem", md: "1.1rem" },
                                                 fontWeight: "bold",
                                                 borderRadius: 2,
                                                 transition: "all 0.3s ease",
@@ -224,54 +240,87 @@ const HeroCarousel = () => {
                                 </Grid>
                             </Container>
                         </Box>
-                    </SwiperSlide>
                 ))}
+            </Box>
 
-                {/* Custom Navigation Arrows */}
-                <IconButton
-                    className="swiper-button-prev"
-                    sx={{
-                        position: "absolute",
-                        left: 20,
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        zIndex: 10,
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        color: "white",
-                        width: 50,
-                        height: 50,
-                        "&:hover": {
-                            backgroundColor: "rgba(0,0,0,0.5)",
-                            transform: "translateY(-50%) scale(1.1)",
-                        },
-                        transition: "all 0.3s ease",
-                    }}
-                >
-                    <ChevronLeft sx={{ fontSize: 30 }} />
-                </IconButton>
+            {/* Navigation Arrows */}
+            <IconButton
+                onClick={prevSlide}
+                sx={{
+                    position: "absolute",
+                    left: { xs: 10, md: 20 },
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    zIndex: 10,
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    color: "white",
+                    width: { xs: 40, md: 50 },
+                    height: { xs: 40, md: 50 },
+                    "&:hover": {
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        transform: "translateY(-50%) scale(1.1)",
+                    },
+                    transition: "all 0.3s ease",
+                }}
+            >
+                <ChevronLeft sx={{ fontSize: { xs: 24, md: 30 } }} />
+            </IconButton>
 
-                <IconButton
-                    className="swiper-button-next"
-                    sx={{
-                        position: "absolute",
-                        right: 20,
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        zIndex: 10,
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        color: "white",
-                        width: 50,
-                        height: 50,
-                        "&:hover": {
-                            backgroundColor: "rgba(0,0,0,0.5)",
-                            transform: "translateY(-50%) scale(1.1)",
-                        },
-                        transition: "all 0.3s ease",
-                    }}
-                >
-                    <ChevronRight sx={{ fontSize: 30 }} />
-                </IconButton>
-            </Swiper>
+            <IconButton
+                onClick={nextSlide}
+                sx={{
+                    position: "absolute",
+                    right: { xs: 10, md: 20 },
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    zIndex: 10,
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    color: "white",
+                    width: { xs: 40, md: 50 },
+                    height: { xs: 40, md: 50 },
+                    "&:hover": {
+                        backgroundColor: "rgba(0,0,0,0.5)",
+                        transform: "translateY(-50%) scale(1.1)",
+                    },
+                    transition: "all 0.3s ease",
+                }}
+            >
+                <ChevronRight sx={{ fontSize: { xs: 24, md: 30 } }} />
+            </IconButton>
+
+            {/* Pagination Dots */}
+            <Box
+                sx={{
+                    position: "absolute",
+                    bottom: { xs: 20, md: 30 },
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    display: "flex",
+                    gap: { xs: 0.5, md: 1 },
+                    zIndex: 10,
+                }}
+            >
+                {heroSlides.map((_, index) => (
+                    <Box
+                        key={index}
+                        onClick={() => goToSlide(index)}
+                        sx={{
+                            width: { xs: 8, md: 12 },
+                            height: { xs: 8, md: 12 },
+                            borderRadius: "50%",
+                            backgroundColor: index === currentSlide 
+                                ? "white" 
+                                : "rgba(255,255,255,0.5)",
+                            cursor: "pointer",
+                            transition: "all 0.3s ease",
+                            "&:hover": {
+                                backgroundColor: "white",
+                                transform: "scale(1.2)",
+                            },
+                        }}
+                    />
+                ))}
+            </Box>
         </Box>
     );
 };
