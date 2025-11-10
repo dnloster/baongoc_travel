@@ -164,13 +164,13 @@ const Header = () => {
                                     isHomePage && !isScrolled
                                         ? "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
                                         : "none",
-                                maxWidth: {
-                                    xs: "120px",
-                                    sm: "160px", 
-                                    md: isHomePage && !isScrolled ? "280px" : "220px"
-                                },
-                                width: "auto",
-                                height: "auto"
+                                // maxWidth: {
+                                //     xs: "120px",
+                                //     sm: "160px", 
+                                //     md: isHomePage && !isScrolled ? "280px" : "220px"
+                                // },
+                                // width: "auto",
+                                // height: "auto"
                             }}
                         />
                     </Box>
