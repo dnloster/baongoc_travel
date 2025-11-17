@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.aacd153d.css",
-    "main.js": "/static/js/main.c25c6627.js",
+    "main.css": "/static/css/main.d40753e8.css",
+    "main.js": "/static/js/main.2804bb44.js",
+    "static/media/2.png": "/static/media/2.ea5b6498a541401ff577.png",
+    "static/media/BN3.png": "/static/media/BN3.b9d01b89a5d08112de38.png",
+    "static/media/BN1.png": "/static/media/BN1.bb2039d4082bfbcb0865.png",
     "static/media/china.png": "/static/media/china.c1900b2b9d84d9277dea.png",
-    "static/media/logo-main.png": "/static/media/logo-main.5510b3bbabe93eb904de.png",
     "static/media/vietnam.png": "/static/media/vietnam.266bac0698bd2311116a.png",
-    "static/media/logo-color1.png": "/static/media/logo-color1.e3f43af786f1cea85317.png",
-    "static/media/logo-ngang.png": "/static/media/logo-ngang.1e1bf8744412ec20168d.png",
     "static/media/zalo.svg": "/static/media/zalo.9a3807bd0aeb1523d5088f182f8b69b6.svg",
     "index.html": "/index.html",
-    "main.aacd153d.css.map": "/static/css/main.aacd153d.css.map",
-    "main.c25c6627.js.map": "/static/js/main.c25c6627.js.map"
+    "main.d40753e8.css.map": "/static/css/main.d40753e8.css.map",
+    "main.2804bb44.js.map": "/static/js/main.2804bb44.js.map"
   },
   "entrypoints": [
-    "static/css/main.aacd153d.css",
-    "static/js/main.c25c6627.js"
+    "static/css/main.d40753e8.css",
+    "static/js/main.2804bb44.js"
   ]
 }
