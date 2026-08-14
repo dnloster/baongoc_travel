@@ -2,13 +2,13 @@
 
 /* Logo responsive styles */
 .logo-home-large {
-    width: 400px;
+    width: 300px;
     max-width: 100%;
     height: auto;
 }
 
 .logo-default {
-    width: 300px;
+    width: 250px;
     max-width: 100%;
     height: auto;
 }
@@ -415,4 +415,114 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.truncate-4-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Customer Feedback Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feedback-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.feedback-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.feedback-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.feedback-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.feedback-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.feedback-card:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+/* Floating Quote Animation */
+@keyframes floatQuote {
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+.floating-quote {
+    animation: floatQuote 6s ease-in-out infinite;
+}
+
+/* Pulse Animation for Scroll Indicator */
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Smooth Scroll for Feedback Cards */
+.feedback-scroll-container {
+    scroll-snap-type: x mandatory;
+}
+
+.feedback-card {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* Custom Scrollbar Styles */
+.feedback-scrollbar::-webkit-scrollbar {
+    height: 8px;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+}
+
+/* Mobile Touch Scroll Enhancement */
+@media (max-width: 600px) {
+    .feedback-scroll-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
 }

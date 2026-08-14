@@ -27,7 +27,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { vi } from "date-fns/locale/vi";
-import Logo from "../assets/logo_PNG/logo-main.png";
+import Logo from "../assets/icon_png/2.png";
 import ChinaTourIcon from "../assets/icon_flag/china.png";
 import VietnamTourIcon from "../assets/icon_flag/vietnam.png";
 import "../styles/sweetalert-custom.css";
@@ -194,9 +194,8 @@ const BookingSearchBox = () => {
                     <h3 style="color: #1976d2; margin-top: 0;">Bảo Ngọc Travel hỗ trợ làm Sổ thông hành</h3>
                     <p><strong>📋 Dịch vụ làm hộ chiếu:</strong></p>
                     <ul style="margin: 10px 0;">
-                        <li>📄 Sổ thông hành phổ thông (48 trang)</li>
-                        <li>📗 Sổ thông hành ngoại giao</li>
-                        <li>📘 Sổ thông hành công vụ</li>
+                        <li>📄 Sổ thông hành du lịch</li>
+                        <li>📗 Sổ thông hành thương mại</li>
                         <li>🔄 Gia hạn sổ thông hành</li>
                         <li>📝 Thay đổi thông tin trong sổ</li>
                         <li>🆕 Cấp lại khi mất/hỏng</li>
@@ -220,7 +219,7 @@ const BookingSearchBox = () => {
                         💰 Phí dịch vụ từ: <span style="color: #2e7d32;">200.000đ</span>
                     </p>
                     <p style="color: #1976d2; font-weight: bold;">
-                        📞 Hotline: <a href="tel:1900xxxx" style="color: #1976d2;">1900.xxxx</a>
+                        📞 Hotline: <a href="tel:1900xxxx" style="color: #1976d2;">078 626 2222</a>
                     </p>
                 </div>
             `,
@@ -256,9 +255,9 @@ const BookingSearchBox = () => {
             sx={{
                 position: "relative",
                 zIndex: 10,
-                transform: "translateY(-50%)",
-                mb: -6,
-                display: { xs: "none", md: "block" }, // Hide on mobile, show on desktop
+                display: { xs: "none", md: "block" },
+                mt: { md: -9 },
+                mb: { md: 2 },
             }}
         >
             <Container maxWidth="lg">
@@ -317,31 +316,9 @@ const BookingSearchBox = () => {
                             dateAdapter={AdapterDateFns}
                             adapterLocale={vi}
                         >
-                            <Grid
-                                container
-                                spacing={2}
-                                alignItems="stretch"
-                                justifyContent="flex-start"
-                                sx={{
-                                    flexWrap: { xs: "wrap", lg: "nowrap" },
-                                    flexDirection: {
-                                        xs: "column",
-                                        sm: "row",
-                                        lg: "row",
-                                    },
-                                }}
-                            >
+                            <Grid container spacing={2} alignItems="flex-end">
                                 {/* From Location */}
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={6}
-                                    lg="auto"
-                                    sx={{
-                                        minWidth: { xs: "100%", lg: 280 },
-                                        flex: { lg: "1 1 auto" },
-                                    }}
-                                >
+                                <Grid size={{ xs: 12, md: 4 }}>
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
@@ -375,6 +352,7 @@ const BookingSearchBox = () => {
                                                         : "Chọn điểm đến"
                                                 }
                                                 size="medium"
+                                                fullWidth
                                                 InputProps={{
                                                     ...params.InputProps,
                                                     startAdornment: (
@@ -389,16 +367,7 @@ const BookingSearchBox = () => {
                                 </Grid>
 
                                 {/* Departure Date */}
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={6}
-                                    lg="auto"
-                                    sx={{
-                                        minWidth: { xs: "100%", lg: 200 },
-                                        flex: { lg: "0 0 auto" },
-                                    }}
-                                >
+                                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
@@ -412,9 +381,11 @@ const BookingSearchBox = () => {
                                             setDepartureDate(newValue)
                                         }
                                         format="dd/MM/yyyy"
+                                        sx={{ width: "100%" }}
                                         slotProps={{
                                             textField: {
                                                 size: "medium",
+                                                fullWidth: true,
                                                 placeholder:
                                                     "Th 3, 26 thg 8, 2025",
                                                 InputProps: {
@@ -430,16 +401,7 @@ const BookingSearchBox = () => {
                                 </Grid>
 
                                 {/* Price Range / Guests */}
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={8}
-                                    lg="auto"
-                                    sx={{
-                                        minWidth: { xs: "100%", lg: 280 },
-                                        flex: { lg: "1 1 auto" },
-                                    }}
-                                >
+                                <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
@@ -460,6 +422,7 @@ const BookingSearchBox = () => {
                                                 {...params}
                                                 placeholder="Chọn mức giá"
                                                 size="medium"
+                                                fullWidth
                                                 InputProps={{
                                                     ...params.InputProps,
                                                     startAdornment: (
@@ -474,15 +437,11 @@ const BookingSearchBox = () => {
                                 </Grid>
 
                                 {/* Search Button */}
-                                <Grid item xs={12} sm={4} lg="auto">
+                                <Grid size={{ xs: 12, sm: 12, md: 2 }}>
                                     <Box
                                         sx={{
-                                            mt: { xs: 2, lg: 3 },
                                             display: "flex",
-                                            justifyContent: {
-                                                xs: "center",
-                                                sm: "flex-start",
-                                            },
+                                            justifyContent: "stretch",
                                         }}
                                     >
                                         <Button
@@ -491,33 +450,16 @@ const BookingSearchBox = () => {
                                             size="large"
                                             startIcon={<SearchIcon />}
                                             sx={{
-                                                minWidth: {
-                                                    xs: "100%",
-                                                    sm: "auto",
-                                                },
+                                                width: "100%",
                                                 height: 56,
-                                                px: { xs: 4, sm: 3 },
+                                                px: 2,
                                                 borderRadius: 2,
                                                 textTransform: "none",
                                                 fontSize: "1rem",
                                                 fontWeight: 600,
-                                                display: {
-                                                    xs: "flex",
-                                                    sm: "inline-flex",
-                                                },
-                                                "@media (max-width: 600px)": {
-                                                    "& .MuiButton-startIcon": {
-                                                        marginRight: 1,
-                                                    },
-                                                },
                                             }}
                                         >
-                                            <span className="desktop-hidden sm-visible">
-                                                Tìm kiếm
-                                            </span>
-                                            <span className="mobile-visible sm-hidden">
-                                                Tìm tour
-                                            </span>
+                                            Tìm kiếm
                                         </Button>
                                     </Box>
                                 </Grid>

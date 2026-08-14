@@ -1,266 +1,225 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
     AppBar,
     Toolbar,
-    Typography,
-    Button,
     Box,
+    Button,
     IconButton,
-    useMediaQuery,
-    useTheme,
     Drawer,
     List,
-    ListItem,
     ListItemButton,
     ListItemText,
+    Container,
 } from "@mui/material";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
-import Logo from "../assets/logo_PNG/logo-ngang.png";
+import LogoLight from "../assets/icon_png/BN1.png";
+import LogoDark from "../assets/icon_png/2.png";
 
-const Header = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+const navItems = [
+    { label: "Trang chủ", path: "/" },
+    { label: "Tour du lịch", path: "/tours" },
+    { label: "Về chúng tôi", path: "/about" },
+    { label: "Liên hệ", path: "/contact" },
+];
+
+export default function TravelHeader() {
+    const [scrolled, setScrolled] = useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-    // Check if current page is Home
     const isHomePage = location.pathname === "/";
+    const isSolid = scrolled || !isHomePage;
 
-    // Detect scroll
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            setIsScrolled(scrollTop > 50);
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+        document.body.style.overflow = mobileOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
         };
+    }, [mobileOpen]);
 
-        // Only add scroll listener on Home page
-        if (isHomePage) {
-            window.addEventListener("scroll", handleScroll);
-            return () => window.removeEventListener("scroll", handleScroll);
-        } else {
-            // On other pages, always show as scrolled (white background)
-            setIsScrolled(true);
-        }
-    }, [isHomePage]);
-
-    const menuItems = [
-        { label: "Trang chủ", path: "/" },
-        { label: "Tour du lịch", path: "/tours" },
-        { label: "Về chúng tôi", path: "/about" },
-        { label: "Liên hệ", path: "/contact" },
-    ];
-
-    // const handleMenuClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // };
-
-    // const handleMenuClose = () => {
-    //     setAnchorEl(null);
-    // };
-
-    const handleMobileMenuToggle = () => {
-        setMobileMenuOpen(!mobileMenuOpen);
+    const handleNavClick = (path) => {
+        navigate(path);
+        setMobileOpen(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
-
-    const isActivePath = (path) => {
-        return location.pathname === path;
-    };
-
-    const mobileMenu = (
-        <Drawer
-            anchor="left"
-            open={mobileMenuOpen}
-            onClose={handleMobileMenuToggle}
-            sx={{
-                "& .MuiDrawer-paper": {
-                    width: 250,
-                    boxSizing: "border-box",
-                },
-            }}
-        >
-            <Box
-                sx={{
-                    p: 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    backgroundColor: "primary.main",
-                    color: "white",
-                }}
-            >
-                <Typography variant="h6" color="inherit" fontWeight="bold">
-                    Travel Tours
-                </Typography>
-                <IconButton
-                    onClick={handleMobileMenuToggle}
-                    sx={{ color: "white" }}
-                >
-                    <CloseIcon />
-                </IconButton>
-            </Box>
-            <List>
-                {menuItems.map((item) => (
-                    <ListItem key={item.path} disablePadding>
-                        <ListItemButton
-                            component={Link}
-                            to={item.path}
-                            onClick={handleMobileMenuToggle}
-                            selected={isActivePath(item.path)}
-                        >
-                            <ListItemText primary={item.label} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-        </Drawer>
-    );
 
     return (
         <>
             <AppBar
                 position="fixed"
+                elevation={isSolid ? 2 : 0}
                 sx={{
-                    backgroundColor:
-                        isHomePage && !isScrolled
-                            ? "transparent"
-                            : "rgba(255, 255, 255, 0.95)",
-                    backdropFilter:
-                        isHomePage && !isScrolled ? "none" : "blur(10px)",
-                    boxShadow:
-                        isHomePage && !isScrolled
-                            ? "none"
-                            : "0 2px 20px rgba(0,0,0,0.1)",
-                    color: "text.primary",
-                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                    borderBottom:
-                        isHomePage && !isScrolled
-                            ? "none"
-                            : "1px solid rgba(0,0,0,0.08)",
+                    backgroundColor: isSolid
+                        ? "rgba(255,255,255,0.97)"
+                        : "transparent",
+                    backdropFilter: isSolid ? "blur(10px)" : "none",
+                    color: isSolid ? "#1e293b" : "#fff",
+                    transition: "background-color 0.25s ease, box-shadow 0.25s ease",
+                    zIndex: 1200,
                 }}
             >
-                <Toolbar>
-                    {/* Logo */}
-                    <Box
+                <Container maxWidth="lg" disableGutters={false}>
+                    <Toolbar
+                        disableGutters
                         sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            flexGrow: 0,
+                            minHeight: { xs: 64, md: 80 },
+                            px: { xs: 1.5, sm: 2 },
+                            justifyContent: "space-between",
                         }}
                     >
-                        <img
-                            src={Logo}
-                            alt="Travel Tours Logo"
-                            className={`${
-                                isHomePage && !isScrolled
-                                    ? "logo-home-large"
-                                    : "logo-default"
-                            }`}
-                            style={{
-                                transition:
-                                    "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                                filter:
-                                    isHomePage && !isScrolled
-                                        ? "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))"
-                                        : "none",
-                                // maxWidth: {
-                                //     xs: "120px",
-                                //     sm: "160px", 
-                                //     md: isHomePage && !isScrolled ? "280px" : "220px"
-                                // },
-                                // width: "auto",
-                                // height: "auto"
-                            }}
-                        />
-                    </Box>
-
-                    {/* Desktop Menu */}
-                    {!isMobile && (
                         <Box
+                            component="button"
+                            onClick={() => handleNavClick("/")}
+                            aria-label="Trang chủ Bảo Ngọc Travel"
                             sx={{
-                                flexGrow: 1,
+                                border: 0,
+                                background: "none",
+                                p: 0,
+                                cursor: "pointer",
                                 display: "flex",
-                                justifyContent: "center",
+                                alignItems: "center",
+                                width: { xs: 132, sm: 160, md: 188 },
+                                flexShrink: 0,
                             }}
                         >
-                            {menuItems.map((item) => (
-                                <Button
-                                    key={item.path}
-                                    component={Link}
-                                    to={item.path}
-                                    sx={{
-                                        mx: { xs: 0.5, md: 1 },
-                                        px: { xs: 1, md: 2 },
-                                        py: { xs: 0.5, md: 1 },
-                                        fontSize: { xs: "0.8rem", md: "0.9rem" },
-                                        color: isActivePath(item.path)
-                                            ? isHomePage && !isScrolled
-                                                ? "#FFD700" // Vàng nổi bật trên carousel
-                                                : "primary.main"
-                                            : isHomePage && !isScrolled
-                                            ? "white"
-                                            : "text.primary",
-                                        fontWeight: isActivePath(item.path)
-                                            ? "bold"
-                                            : "normal",
-                                        textShadow:
-                                            isHomePage && !isScrolled
-                                                ? "1px 1px 2px rgba(0,0,0,0.5)"
-                                                : "none",
-                                        backgroundColor: isActivePath(item.path) && isHomePage && !isScrolled
-                                            ? "rgba(255, 215, 0, 0.2)"
-                                            : "transparent",
-                                        borderRadius: isActivePath(item.path) && isHomePage && !isScrolled
-                                            ? 1
-                                            : 0,
-                                        "&:hover": {
-                                            backgroundColor: "primary.light",
-                                            color: "white",
-                                        },
-                                        transition: "all 0.3s ease",
-                                    }}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </Box>
-                    )}
-
-                    {/* Mobile Menu Button */}
-                    {isMobile && (
-                        <Box
-                            sx={{
-                                flexGrow: 1,
-                                display: "flex",
-                                justifyContent: "flex-end",
-                            }}
-                        >
-                            <IconButton
-                                edge="start"
-                                aria-label="menu"
-                                onClick={handleMobileMenuToggle}
+                            <Box
+                                component="img"
+                                src={isSolid ? LogoDark : LogoLight}
+                                alt="Bảo Ngọc Travel"
                                 sx={{
-                                    color:
-                                        isHomePage && !isScrolled
-                                            ? "white"
-                                            : "text.primary",
-                                    transition: "all 0.3s ease",
-                                    filter:
-                                        isHomePage && !isScrolled
-                                            ? "drop-shadow(1px 1px 2px rgba(0,0,0,0.5))"
-                                            : "none",
+                                    width: "100%",
+                                    height: "auto",
+                                    display: "block",
+                                }}
+                            />
+                        </Box>
+
+                        <Box
+                            sx={{
+                                display: { xs: "none", md: "flex" },
+                                gap: 0.5,
+                                alignItems: "center",
+                            }}
+                        >
+                            {navItems.map((item) => {
+                                const active = location.pathname === item.path;
+                                return (
+                                    <Button
+                                        key={item.path}
+                                        onClick={() => handleNavClick(item.path)}
+                                        sx={{
+                                            color: active
+                                                ? "#c9a227"
+                                                : isSolid
+                                                ? "#334155"
+                                                : "#fff",
+                                            fontWeight: active ? 700 : 500,
+                                            fontSize: "0.95rem",
+                                            px: 2,
+                                            position: "relative",
+                                            "&::after": {
+                                                content: '""',
+                                                position: "absolute",
+                                                bottom: 6,
+                                                left: "50%",
+                                                transform: "translateX(-50%)",
+                                                width: active ? "60%" : 0,
+                                                height: 2,
+                                                bgcolor: "#c9a227",
+                                                transition: "width 0.2s ease",
+                                            },
+                                            "&:hover": {
+                                                backgroundColor: "transparent",
+                                                color: "#c9a227",
+                                                "&::after": { width: "60%" },
+                                            },
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Button>
+                                );
+                            })}
+                        </Box>
+
+                        <IconButton
+                            onClick={() => setMobileOpen(true)}
+                            aria-label="Mở menu"
+                            sx={{
+                                display: { xs: "inline-flex", md: "none" },
+                                color: isSolid ? "#1e293b" : "#fff",
+                            }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+
+            <Drawer
+                anchor="right"
+                open={mobileOpen}
+                onClose={() => setMobileOpen(false)}
+                PaperProps={{
+                    sx: {
+                        width: { xs: "78%", sm: 320 },
+                        maxWidth: 360,
+                        bgcolor: "#111827",
+                        color: "#fff",
+                    },
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        p: 1.5,
+                    }}
+                >
+                    <IconButton
+                        onClick={() => setMobileOpen(false)}
+                        sx={{ color: "#fff" }}
+                        aria-label="Đóng menu"
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </Box>
+                <List sx={{ px: 1 }}>
+                    {navItems.map((item) => {
+                        const active = location.pathname === item.path;
+                        return (
+                            <ListItemButton
+                                key={item.path}
+                                onClick={() => handleNavClick(item.path)}
+                                selected={active}
+                                sx={{
+                                    borderRadius: 1,
+                                    mb: 0.5,
+                                    color: active ? "#facc15" : "#fff",
+                                    "&.Mui-selected": {
+                                        bgcolor: "rgba(250, 204, 21, 0.12)",
+                                    },
                                 }}
                             >
-                                <MenuIcon />
-                            </IconButton>
-                        </Box>
-                    )}
-                </Toolbar>
-            </AppBar>
-            {mobileMenu}
+                                <ListItemText
+                                    primary={item.label}
+                                    primaryTypographyProps={{
+                                        fontWeight: active ? 700 : 500,
+                                        fontSize: "1.05rem",
+                                    }}
+                                />
+                            </ListItemButton>
+                        );
+                    })}
+                </List>
+            </Drawer>
         </>
     );
-};
-
-export default Header;
+}

@@ -86,7 +86,8 @@ const Contact = () => {
         if (!formData.message.trim()) {
             newErrors.message = "Vui lòng nhập nội dung tin nhắn";
         } else if (formData.message.trim().length < 10) {
-            newErrors.message = "Nội dung tin nhắn quá ngắn (tối thiểu 10 ký tự)";
+            newErrors.message =
+                "Nội dung tin nhắn quá ngắn (tối thiểu 10 ký tự)";
         }
 
         setErrors(newErrors);
@@ -95,23 +96,24 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!validateForm()) {
             return;
         }
 
         setLoading(true);
-        
+
         try {
             // Simulate API call
             await new Promise((resolve) => setTimeout(resolve, 2000));
-            
+
             setSnackbar({
                 open: true,
-                message: "Tin nhắn đã được gửi thành công! Chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.",
+                message:
+                    "Tin nhắn đã được gửi thành công! Chúng tôi sẽ liên hệ lại với bạn sớm nhất có thể.",
                 severity: "success",
             });
-            
+
             // Reset form
             setFormData({
                 name: "",
@@ -123,7 +125,8 @@ const Contact = () => {
         } catch (error) {
             setSnackbar({
                 open: true,
-                message: "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.",
+                message:
+                    "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.",
                 severity: "error",
             });
         } finally {
@@ -131,69 +134,12 @@ const Contact = () => {
         }
     };
 
-    const contactInfo = [
-        {
-            icon: <LocationIcon sx={{ color: "#1976d2", fontSize: 28 }} />,
-            title: "Địa chỉ văn phòng",
-            content: [
-                "123 Đường Nguyễn Huệ, Quận 1",
-                "Thành phố Hồ Chí Minh, Việt Nam",
-            ],
-            action: "Xem bản đồ",
-        },
-        {
-            icon: <PhoneIcon sx={{ color: "#1976d2", fontSize: 28 }} />,
-            title: "Điện thoại",
-            content: [
-                "Hotline: 1900 1234",
-                "Di động: 0901 234 567",
-            ],
-            action: "Gọi ngay",
-        },
-        {
-            icon: <EmailIcon sx={{ color: "#1976d2", fontSize: 28 }} />,
-            title: "Email",
-            content: [
-                "info@baongoctravel.com",
-                "booking@baongoctravel.com",
-            ],
-            action: "Gửi email",
-        },
-        {
-            icon: <TimeIcon sx={{ color: "#1976d2", fontSize: 28 }} />,
-            title: "Giờ làm việc",
-            content: [
-                "Thứ 2 - Thứ 6: 8:00 - 18:00",
-                "Thứ 7 - Chủ nhật: 8:00 - 17:00",
-            ],
-            action: null,
-        },
-    ];
-
     const socialLinks = [
         {
-            name: "Facebook",
+            name: "Bảo Ngọc Travel",
             icon: <FacebookIcon />,
-            url: "#",
+            url: "https://www.facebook.com/baongoctravel24",
             color: "#1877f2",
-        },
-        {
-            name: "Instagram", 
-            icon: <InstagramIcon />,
-            url: "#",
-            color: "#e4405f",
-        },
-        {
-            name: "YouTube",
-            icon: <YouTubeIcon />,
-            url: "#",
-            color: "#ff0000",
-        },
-        {
-            name: "Website",
-            icon: <WebsiteIcon />,
-            url: "#",
-            color: "#1976d2",
         },
     ];
 
@@ -201,59 +147,56 @@ const Contact = () => {
         {
             name: "WhatsApp",
             icon: <WhatsAppIcon />,
-            action: () => window.open("https://wa.me/84901234567", "_blank"),
+            action: () => window.open("https://wa.me/0786262222", "_blank"),
             color: "#25d366",
             label: "Chat WhatsApp",
         },
         {
-            name: "Telegram",
-            icon: <TelegramIcon />,
-            action: () => window.open("https://t.me/baongoctravel", "_blank"),
-            color: "#0088cc",
-            label: "Chat Telegram",
-        },
-        {
             name: "Zalo",
             icon: <MessageIcon />,
-            action: () => window.open("https://zalo.me/0901234567", "_blank"),
+            action: () => window.open("https://zalo.me/0786262222", "_blank"),
             color: "#0068ff",
             label: "Chat Zalo",
         },
     ];
 
     return (
-        <Box sx={{ 
-            backgroundColor: "#f8fafc", 
-            minHeight: "100vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start"
-        }}>
-            <Container 
-                maxWidth="lg" 
-                sx={{ 
+        <Box
+            sx={{
+                backgroundColor: "#f8fafc",
+                minHeight: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+            }}
+        >
+            <Container
+                maxWidth="lg"
+                sx={{
                     py: { xs: 4, md: 6 },
                     mx: "auto",
                     px: { xs: 2, sm: 3, md: 4 },
-                    width: "100%"
+                    width: "100%",
                 }}
             >
                 {/* Header Section */}
-                <Box sx={{ 
-                    textAlign: "center", 
-                    mb: 6,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center"
-                }}>
+                <Box
+                    sx={{
+                        textAlign: "center",
+                        mb: 6,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
                     <Typography
                         variant="h2"
                         sx={{
                             fontWeight: 700,
                             color: "#1e293b",
                             mb: 2,
-                            fontSize: { xs: "2rem", md: "3rem" },
+                            fontSize: { xs: "1.6rem", sm: "2rem", md: "2.5rem" },
                         }}
                     >
                         Liên hệ với chúng tôi
@@ -269,282 +212,176 @@ const Contact = () => {
                             textAlign: "center",
                         }}
                     >
-                        Hãy để lại thông tin để chúng tôi tư vấn và hỗ trợ bạn tốt nhất.
-                        Đội ngũ chuyên viên của BẢO NGỌC Travel luôn sẵn sàng phục vụ!
+                        Hãy để lại thông tin để chúng tôi tư vấn và hỗ trợ bạn
+                        tốt nhất. Đội ngũ chuyên viên của BẢO NGỌC Travel luôn
+                        sẵn sàng phục vụ!
                     </Typography>
                 </Box>
 
-                <Grid container spacing={4} sx={{ 
-                    justifyContent: "center", 
-                    alignItems: "flex-start",
-                }}>
-                    {/* Contact Information */}
-                    <Grid item xs={12} md={6} lg={5} sx={{ display: "flex" }}>
-                        <Paper
-                            elevation={0}
-                            sx={{
-                                p: 5,
-                                borderRadius: 4,
-                                border: "1px solid #e2e8f0",
-                                height: "fit-content",
-                                position: "sticky",
-                                top: 20,
-                                width: "100%",
-                                flex: 1,
-                                background: "linear-gradient(135deg, #ffffff 0%, #fafbfc 100%)",
-                                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-                                transition: "all 0.3s ease-in-out",
-                                "&:hover": {
-                                    boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
-                                    transform: "translateY(-2px)",
-                                }
-                            }}
-                        >
-                            <Box sx={{ mb: 4 }}>
+                <Grid
+                    container
+                    spacing={3}
+                    sx={{
+                        justifyContent: "center",
+                        alignItems: "stretch",
+                    }}
+                >
+                    <Grid size={{ xs: 12, md: 5 }}>
+                    <Paper
+                        elevation={0}
+                        sx={{
+                            p: { xs: 2.5, md: 4 },
+                            borderRadius: 3,
+                            border: "1px solid #e2e8f0",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: { xs: "column", sm: "row", md: "column" },
+                            gap: { xs: 3, md: 4 },
+                            width: "100%",
+                            background:
+                                "linear-gradient(135deg, #ffffff 0%, #fafbfc 100%)",
+                            boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                        }}
+                    >
+                        {/* Social Media */}
+                        <Box>
+                            <Box sx={{ mb: 2 }}>
                                 <Typography
-                                    variant="h5"
+                                    variant="h6"
                                     sx={{
                                         fontWeight: 700,
                                         color: "#1e293b",
                                         mb: 1,
-                                        fontSize: "1.5rem",
-                                        position: "relative",
-                                        display: "inline-block",
+                                        fontSize: "1.1rem",
                                     }}
                                 >
-                                    Thông tin liên hệ
+                                    Theo dõi chúng tôi
                                 </Typography>
                                 <Box
                                     sx={{
-                                        width: "60px",
-                                        height: "4px",
-                                        background: "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
+                                        width: "50px",
+                                        height: "3px",
+                                        background:
+                                            "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
                                         borderRadius: "2px",
-                                        mt: 1,
                                     }}
                                 />
                             </Box>
-
-                            {contactInfo.map((info, index) => (
-                                <Box 
-                                    key={index} 
-                                    sx={{ 
-                                        mb: 4,
-                                        p: 3,
-                                        borderRadius: 3,
-                                        backgroundColor: "#fafbfc",
-                                        border: "1px solid #f1f5f9",
-                                        transition: "all 0.3s ease-in-out",
-                                        "&:hover": {
-                                            backgroundColor: "#f8fafc",
-                                            borderColor: "#e2e8f0",
-                                            transform: "translateY(-2px)",
-                                            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                                        }
-                                    }}
-                                >
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "flex-start",
-                                            gap: 3,
-                                        }}
-                                    >
-                                        <Box
-                                            sx={{
-                                                p: 2,
-                                                background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
-                                                borderRadius: 3,
-                                                flexShrink: 0,
-                                                boxShadow: "0 2px 8px rgba(25, 118, 210, 0.15)",
-                                                display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                minWidth: 56,
-                                                minHeight: 56,
-                                            }}
-                                        >
-                                            {info.icon}
-                                        </Box>
-                                        <Box sx={{ flex: 1 }}>
-                                            <Typography
-                                                variant="h6"
-                                                sx={{
-                                                    fontWeight: 700,
-                                                    color: "#1e293b",
-                                                    mb: 2,
-                                                    fontSize: "1.1rem",
-                                                }}
-                                            >
-                                                {info.title}
-                                            </Typography>
-                                            {info.content.map((line, idx) => (
-                                                <Typography
-                                                    key={idx}
-                                                    variant="body1"
-                                                    sx={{
-                                                        color: "#475569",
-                                                        mb: 0.8,
-                                                        fontWeight: 500,
-                                                        lineHeight: 1.6,
-                                                    }}
-                                                >
-                                                    {line}
-                                                </Typography>
-                                            ))}
-                                            {info.action && (
-                                                <Button
-                                                    size="small"
-                                                    variant="outlined"
-                                                    sx={{
-                                                        mt: 2,
-                                                        textTransform: "none",
-                                                        borderColor: "#1976d2",
-                                                        color: "#1976d2",
-                                                        fontWeight: 600,
-                                                        px: 2,
-                                                        py: 0.5,
-                                                        borderRadius: 2,
-                                                        fontSize: "0.875rem",
-                                                        "&:hover": {
-                                                            backgroundColor: "#1976d2",
-                                                            color: "white",
-                                                            borderColor: "#1976d2",
-                                                        }
-                                                    }}
-                                                >
-                                                    {info.action}
-                                                </Button>
-                                            )}
-                                        </Box>
-                                    </Box>
-                                </Box>
-                            ))}
-
-                            {/* Social Media */}
-                            <Box sx={{ mt: 5 }}>
-                                <Box sx={{ mb: 3 }}>
-                                    <Typography
-                                        variant="h6"
-                                        sx={{
-                                            fontWeight: 700,
-                                            color: "#1e293b",
-                                            mb: 1,
-                                            fontSize: "1.1rem",
-                                        }}
-                                    >
-                                        Theo dõi chúng tôi
-                                    </Typography>
-                                    <Box
-                                        sx={{
-                                            width: "50px",
-                                            height: "3px",
-                                            background: "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
-                                            borderRadius: "2px",
-                                        }}
-                                    />
-                                </Box>
-                                <Box sx={{ 
-                                    display: "flex", 
-                                    gap: 2, 
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    gap: 2,
                                     flexWrap: "wrap",
                                     p: 2,
                                     backgroundColor: "#fafbfc",
                                     borderRadius: 3,
                                     border: "1px solid #f1f5f9",
-                                }}>
-                                    {socialLinks.map((social, index) => (
-                                        <IconButton
-                                            key={index}
-                                            sx={{
-                                                backgroundColor: social.color,
-                                                color: "white",
-                                                width: 48,
-                                                height: 48,
-                                                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                                                transition: "all 0.3s ease-in-out",
-                                                "&:hover": {
-                                                    backgroundColor: social.color,
-                                                    transform: "translateY(-2px) scale(1.05)",
-                                                    boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
-                                                },
-                                            }}
-                                            onClick={() => window.open(social.url, "_blank")}
-                                        >
-                                            {social.icon}
-                                        </IconButton>
-                                    ))}
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        width: "100%",
+                                        maxWidth: 340,
+                                        overflow: "hidden",
+                                        borderRadius: 2,
+                                    }}
+                                >
+                                <iframe
+                                    title="Facebook Bảo Ngọc Travel"
+                                    src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FBaongoctravel24%2F&tabs&width=340&height=130&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=5664986890234638"
+                                    width="100%"
+                                    height="130"
+                                    style={{
+                                        border: "none",
+                                        overflow: "hidden",
+                                        width: "100%",
+                                        display: "block",
+                                    }}
+                                    scrolling="no"
+                                    frameBorder="0"
+                                    allowFullScreen
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                ></iframe>
                                 </Box>
                             </Box>
+                        </Box>
 
-                            {/* Quick Contact Actions */}
-                            <Box sx={{ mt: 5 }}>
-                                <Box sx={{ mb: 3 }}>
-                                    <Typography
-                                        variant="h6"
+                        {/* Quick Contact Actions */}
+                        <Box>
+                            <Box sx={{ mb: 3 }}>
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        fontWeight: 700,
+                                        color: "#1e293b",
+                                        mb: 1,
+                                        fontSize: "1.1rem",
+                                    }}
+                                >
+                                    Liên hệ nhanh
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        width: "50px",
+                                        height: "3px",
+                                        background:
+                                            "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
+                                        borderRadius: "2px",
+                                    }}
+                                />
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: 2,
+                                }}
+                            >
+                                {quickActions.map((action, index) => (
+                                    <Button
+                                        key={index}
+                                        variant="outlined"
+                                        startIcon={action.icon}
+                                        onClick={action.action}
                                         sx={{
-                                            fontWeight: 700,
-                                            color: "#1e293b",
-                                            mb: 1,
-                                            fontSize: "1.1rem",
+                                            justifyContent: "flex-start",
+                                            borderColor: action.color,
+                                            color: action.color,
+                                            textTransform: "none",
+                                            py: 1.5,
+                                            px: 3,
+                                            fontWeight: 600,
+                                            fontSize: "0.95rem",
+                                            borderRadius: 3,
+                                            borderWidth: 2,
+                                            transition: "all 0.3s ease-in-out",
+                                            "&:hover": {
+                                                backgroundColor: action.color,
+                                                color: "white",
+                                                borderColor: action.color,
+                                                transform: "translateX(8px)",
+                                                boxShadow:
+                                                    "0 4px 12px rgba(0,0,0,0.15)",
+                                            },
+                                            "& .MuiButton-startIcon": {
+                                                marginRight: 2,
+                                            },
                                         }}
                                     >
-                                        Liên hệ nhanh
-                                    </Typography>
-                                    <Box
-                                        sx={{
-                                            width: "50px",
-                                            height: "3px",
-                                            background: "linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)",
-                                            borderRadius: "2px",
-                                        }}
-                                    />
-                                </Box>
-                                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                                    {quickActions.map((action, index) => (
-                                        <Button
-                                            key={index}
-                                            variant="outlined"
-                                            startIcon={action.icon}
-                                            onClick={action.action}
-                                            sx={{
-                                                justifyContent: "flex-start",
-                                                borderColor: action.color,
-                                                color: action.color,
-                                                textTransform: "none",
-                                                py: 1.5,
-                                                px: 3,
-                                                fontWeight: 600,
-                                                fontSize: "0.95rem",
-                                                borderRadius: 3,
-                                                borderWidth: 2,
-                                                transition: "all 0.3s ease-in-out",
-                                                "&:hover": {
-                                                    backgroundColor: action.color,
-                                                    color: "white",
-                                                    borderColor: action.color,
-                                                    transform: "translateX(8px)",
-                                                    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-                                                },
-                                                "& .MuiButton-startIcon": {
-                                                    marginRight: 2,
-                                                }
-                                            }}
-                                        >
-                                            {action.label}
-                                        </Button>
-                                    ))}
-                                </Box>
+                                        {action.label}
+                                    </Button>
+                                ))}
                             </Box>
-                        </Paper>
+                        </Box>
+                    </Paper>
                     </Grid>
 
                     {/* Contact Form */}
-                    <Grid item xs={12} md={6} lg={7} sx={{ display: "flex" }}>
+                    <Grid size={{ xs: 12, md: 7 }} sx={{ display: "flex" }}>
                         <Paper
                             elevation={0}
                             sx={{
-                                p: 4,
+                                p: { xs: 2.5, md: 4 },
                                 borderRadius: 3,
                                 border: "1px solid #e2e8f0",
                                 width: "100%",
@@ -564,7 +401,7 @@ const Contact = () => {
 
                             <Box component="form" onSubmit={handleSubmit}>
                                 <Grid container spacing={3}>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
                                         <TextField
                                             fullWidth
                                             label="Họ và tên"
@@ -576,7 +413,11 @@ const Contact = () => {
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <PersonIcon sx={{ color: "#64748b" }} />
+                                                        <PersonIcon
+                                                            sx={{
+                                                                color: "#64748b",
+                                                            }}
+                                                        />
                                                     </InputAdornment>
                                                 ),
                                             }}
@@ -587,7 +428,7 @@ const Contact = () => {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
                                         <TextField
                                             fullWidth
                                             label="Email"
@@ -600,7 +441,11 @@ const Contact = () => {
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <EmailIcon sx={{ color: "#64748b" }} />
+                                                        <EmailIcon
+                                                            sx={{
+                                                                color: "#64748b",
+                                                            }}
+                                                        />
                                                     </InputAdornment>
                                                 ),
                                             }}
@@ -611,7 +456,7 @@ const Contact = () => {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
                                         <TextField
                                             fullWidth
                                             label="Số điện thoại"
@@ -623,7 +468,11 @@ const Contact = () => {
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <PhoneIcon sx={{ color: "#64748b" }} />
+                                                        <PhoneIcon
+                                                            sx={{
+                                                                color: "#64748b",
+                                                            }}
+                                                        />
                                                     </InputAdornment>
                                                 ),
                                             }}
@@ -634,7 +483,7 @@ const Contact = () => {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} md={6}>
+                                    <Grid size={{ xs: 12, md: 6 }}>
                                         <TextField
                                             fullWidth
                                             label="Tiêu đề"
@@ -646,7 +495,11 @@ const Contact = () => {
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <BusinessIcon sx={{ color: "#64748b" }} />
+                                                        <BusinessIcon
+                                                            sx={{
+                                                                color: "#64748b",
+                                                            }}
+                                                        />
                                                     </InputAdornment>
                                                 ),
                                             }}
@@ -657,7 +510,7 @@ const Contact = () => {
                                             }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
+                                    <Grid size={12}>
                                         <TextField
                                             fullWidth
                                             multiline
@@ -671,8 +524,19 @@ const Contact = () => {
                                             placeholder="Vui lòng mô tả chi tiết nhu cầu của bạn để chúng tôi có thể tư vấn tốt nhất..."
                                             InputProps={{
                                                 startAdornment: (
-                                                    <InputAdornment position="start" sx={{ alignSelf: "flex-start", mt: 2 }}>
-                                                        <MessageIcon sx={{ color: "#64748b" }} />
+                                                    <InputAdornment
+                                                        position="start"
+                                                        sx={{
+                                                            alignSelf:
+                                                                "flex-start",
+                                                            mt: 2,
+                                                        }}
+                                                    >
+                                                        <MessageIcon
+                                                            sx={{
+                                                                color: "#64748b",
+                                                            }}
+                                                        />
                                                     </InputAdornment>
                                                 ),
                                             }}
@@ -685,7 +549,14 @@ const Contact = () => {
                                     </Grid>
                                 </Grid>
 
-                                <Box sx={{ mt: 4, display: "flex", gap: 2, flexWrap: "wrap" }}>
+                                <Box
+                                    sx={{
+                                        mt: 4,
+                                        display: "flex",
+                                        gap: 2,
+                                        flexWrap: "wrap",
+                                    }}
+                                >
                                     <Button
                                         type="submit"
                                         variant="contained"
@@ -704,7 +575,9 @@ const Contact = () => {
                                             },
                                         }}
                                     >
-                                        {loading ? "Đang gửi..." : "Gửi tin nhắn"}
+                                        {loading
+                                            ? "Đang gửi..."
+                                            : "Gửi tin nhắn"}
                                     </Button>
                                     <Button
                                         variant="outlined"
@@ -739,10 +612,15 @@ const Contact = () => {
 
                                 {/* Form Information */}
                                 <Box sx={{ mt: 3 }}>
-                                    <Alert severity="info" sx={{ borderRadius: 2 }}>
+                                    <Alert
+                                        severity="info"
+                                        sx={{ borderRadius: 2 }}
+                                    >
                                         <Typography variant="body2">
-                                            <strong>Lưu ý:</strong> Chúng tôi sẽ phản hồi trong vòng 24 giờ.
-                                            Đối với các trường hợp khẩn cấp, vui lòng gọi trực tiếp hotline{" "}
+                                            <strong>Lưu ý:</strong> Chúng tôi sẽ
+                                            phản hồi trong vòng 24 giờ. Đối với
+                                            các trường hợp khẩn cấp, vui lòng
+                                            gọi trực tiếp hotline{" "}
                                             <strong>1900 1234</strong>.
                                         </Typography>
                                     </Alert>
@@ -753,11 +631,13 @@ const Contact = () => {
                 </Grid>
 
                 {/* Map Section */}
-                <Box sx={{ 
-                    mt: 6,
-                    display: "flex",
-                    justifyContent: "center"
-                }}>
+                <Box
+                    sx={{
+                        mt: 6,
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
                     <Paper
                         elevation={0}
                         sx={{
@@ -783,12 +663,13 @@ const Contact = () => {
                                 variant="body1"
                                 sx={{ color: "#64748b", mb: 3 }}
                             >
-                                Hãy ghé thăm văn phòng của chúng tôi để được tư vấn trực tiếp
+                                Hãy ghé thăm văn phòng của chúng tôi để được tư
+                                vấn trực tiếp
                             </Typography>
                         </Box>
                         <Box
                             sx={{
-                                height: 400,
+                                height: { xs: 280, sm: 360, md: 420 },
                                 backgroundColor: "#f1f5f9",
                                 display: "flex",
                                 alignItems: "center",
@@ -799,23 +680,54 @@ const Contact = () => {
                             {/* Placeholder for Google Maps */}
                             <Box
                                 sx={{
-                                    textAlign: "center",
-                                    color: "#64748b",
+                                    width: "100%",
+                                    height: "100%",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    gap: 3,
+                                    p: 3,
                                 }}
                             >
-                                <LocationIcon sx={{ fontSize: 48, mb: 2 }} />
-                                <Typography variant="h6" gutterBottom>
-                                    Bản đồ Google Maps
-                                </Typography>
-                                <Typography variant="body2">
-                                    123 Đường Nguyễn Huệ, Quận 1, TP.HCM
-                                </Typography>
+                                <iframe
+                                    title="Văn phòng Bảo Ngọc Travel"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230.38380003911485!2d103.96740518578223!3d22.498899867587532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd139bebbb2cd5%3A0xc4dfe9fad75c1fb0!2zNTEgTmd1eeG7hW4gVHJ1bmcgVHLhu7FjLCBD4buRYyBM4bq_dSwgTMOgbyBDYWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1763694827707!5m2!1svi!2s"
+                                    width="100%"
+                                    height="100%"
+                                    style={{
+                                        border: 0,
+                                        borderRadius: "8px",
+                                        minHeight: "350px",
+                                    }}
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                />
                                 <Button
                                     variant="contained"
-                                    sx={{ mt: 2, textTransform: "none" }}
+                                    startIcon={<LocationIcon />}
+                                    size="large"
+                                    sx={{
+                                        textTransform: "none",
+                                        fontWeight: 600,
+                                        px: 4,
+                                        py: 1.5,
+                                        borderRadius: 2,
+                                        backgroundColor: "#1976d2",
+                                        boxShadow:
+                                            "0 4px 12px rgba(25, 118, 210, 0.3)",
+                                        "&:hover": {
+                                            backgroundColor: "#1565c0",
+                                            boxShadow:
+                                                "0 6px 16px rgba(25, 118, 210, 0.4)",
+                                            transform: "translateY(-2px)",
+                                        },
+                                        transition: "all 0.3s ease-in-out",
+                                    }}
                                     onClick={() =>
                                         window.open(
-                                            "https://goo.gl/maps/example",
+                                            "https://maps.app.goo.gl/t3GptNct1Qr3ipfE7",
                                             "_blank"
                                         )
                                     }

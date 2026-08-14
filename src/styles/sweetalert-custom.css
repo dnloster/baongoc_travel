@@ -23,3 +23,119 @@
     border-radius: 8px;
     padding: 12px 24px;
 }
+
+/* Welcome Popup Styles */
+.welcome-popup {
+    border-radius: 20px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    border: none !important;
+}
+
+.welcome-popup .swal2-html-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+}
+
+.welcome-popup .swal2-input {
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    padding: 15px 20px !important;
+    font-size: 14px !important;
+    width: 85% !important;
+    margin: 8px auto !important;
+    transition: all 0.3s ease !important;
+    font-family: "Roboto", sans-serif !important;
+}
+
+.welcome-popup .swal2-input:focus {
+    border-color: #ff9500 !important;
+    box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1) !important;
+    outline: none !important;
+}
+
+.welcome-popup .swal2-input::placeholder {
+    color: #999 !important;
+    font-weight: 400 !important;
+}
+
+.welcome-confirm-btn {
+    background: linear-gradient(135deg, #ff9500 0%, #ff7b00 100%) !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 30px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 5px 15px rgba(255, 149, 0, 0.3) !important;
+}
+
+.welcome-confirm-btn:hover {
+    background: linear-gradient(135deg, #ff7b00 0%, #ff6600 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(255, 149, 0, 0.4) !important;
+}
+
+.welcome-cancel-btn {
+    background: #6c757d !important;
+    border: none !important;
+    border-radius: 25px !important;
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+    transition: all 0.3s ease !important;
+}
+
+.welcome-cancel-btn:hover {
+    background: #5a6268 !important;
+    transform: translateY(-1px) !important;
+}
+
+.welcome-close-btn {
+    color: #999 !important;
+    font-size: 20px !important;
+    transition: all 0.3s ease !important;
+}
+
+.welcome-close-btn:hover {
+    color: #ff9500 !important;
+    transform: scale(1.1) !important;
+}
+
+/* Animation cho popup */
+.welcome-popup.swal2-show {
+    animation: welcomeSlideIn 0.5s ease-out !important;
+}
+
+@keyframes welcomeSlideIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive cho mobile */
+@media (max-width: 600px) {
+    .welcome-popup {
+        width: 95% !important;
+        margin: 0 !important;
+    }
+
+    .welcome-popup .swal2-input {
+        width: 90% !important;
+        padding: 12px 15px !important;
+        font-size: 14px !important;
+    }
+
+    .welcome-confirm-btn,
+    .welcome-cancel-btn {
+        padding: 10px 20px !important;
+        font-size: 13px !important;
+        margin: 5px !important;
+    }
+}

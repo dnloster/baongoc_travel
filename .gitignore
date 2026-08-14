@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Tour source docs (too large for GitHub; content lives in src/data/tours.js)
+src/assets/tour_details/

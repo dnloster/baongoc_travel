@@ -51,147 +51,11 @@ import {
     Sort as SortIcon,
 } from "@mui/icons-material";
 import useAppStore from "../store/appStore";
+import { useNavigate } from "react-router-dom";
+import { TOURS, TOUR_CATEGORIES } from "../data/tours";
 
-// Mock data for tours - moved outside component to prevent dependency issues
-const mockTours = [
-    {
-        id: 1,
-        title: "Hạ Long Bay Adventure",
-        description:
-            "Khám phá vẻ đẹp kỳ diệu của Vịnh Hạ Long với tour 3 ngày 2 đêm. Tham quan các hang động đẹp, thưởng thức hải sản tươi ngon và trải nghiệm trên du thuyền sang trọng.",
-        image: "https://images.unsplash.com/photo-1669819894338-53ab7afc6958?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1741",
-        price: 2500000,
-        duration: "3 ngày 2 đêm",
-        location: "Quảng Ninh",
-        category: "Biển đảo",
-        rating: 4.8,
-        available: true,
-        originalPrice: 3000000,
-        discount: 17,
-    },
-    {
-        id: 2,
-        title: "Sapa Highland Trek",
-        description:
-            "Trải nghiệm văn hóa và thiên nhiên tuyệt đẹp tại Sapa. Trekking qua các thửa ruộng bậc thang và làng bản người dân tộc thiểu số với hướng dẫn viên địa phương.",
-        image: "https://statics.vinpearl.com/sapa-trekking-01_1682413207.jpg",
-        price: 1800000,
-        duration: "2 ngày 1 đêm",
-        location: "Lào Cai",
-        category: "Miền núi",
-        rating: 4.6,
-        available: true,
-        originalPrice: 2100000,
-        discount: 14,
-    },
-    {
-        id: 3,
-        title: "Phú Quốc Island Paradise",
-        description:
-            "Nghỉ dưỡng tại đảo ngọc Phú Quốc với bãi biển tuyệt đẹp. Khám phá cáp treo Hòn Thơm, làng chài Hàm Ninh và thưởng thức hải sản tươi sống.",
-        image: "https://images.unsplash.com/photo-1572572216428-91def7b78278?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1756",
-        price: 3200000,
-        duration: "4 ngày 3 đêm",
-        location: "Kiên Giang",
-        category: "Biển đảo",
-        rating: 4.9,
-        available: true,
-        originalPrice: 3800000,
-        discount: 16,
-    },
-    {
-        id: 4,
-        title: "Hội An Ancient Town",
-        description:
-            "Khám phá phố cổ Hội An với kiến trúc độc đáo và ẩm thực đặc sắc. Tham quan các di tích lịch sử, làm đèn lồng và thưởng thức các món ăn truyền thống.",
-        image: "https://images.unsplash.com/photo-1652731011413-93d4c5aa5c7c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-        price: 2200000,
-        duration: "3 ngày 2 đêm",
-        location: "Quảng Nam",
-        category: "Văn hóa",
-        rating: 4.7,
-        available: true,
-        originalPrice: 2500000,
-        discount: 12,
-    },
-    {
-        id: 5,
-        title: "Đà Lạt Flower City",
-        description:
-            "Thành phố ngàn hoa với khí hậu mát mẻ quanh năm. Tham quan các vườn hoa, thác nước đẹp và thưởng thức cà phê đặc sản vùng cao nguyên Lâm Đồng.",
-        image: "https://images.unsplash.com/photo-1712111554205-27688396a2cf?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170",
-        price: 1900000,
-        duration: "2 ngày 1 đêm",
-        location: "Lâm Đồng",
-        category: "Miền núi",
-        rating: 4.5,
-        available: true,
-        originalPrice: 2200000,
-        discount: 14,
-    },
-    {
-        id: 6,
-        title: "Nha Trang Beach Resort",
-        description:
-            "Thiên đường biển Nha Trang với bãi biển đẹp và các hoạt động thể thao nước hấp dẫn. Tham quan đảo Hòn Tre, Vinpearl Land và tắm bùn khoáng.",
-        image: "https://images.unsplash.com/photo-1533002832-1721d16b4bb9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1878",
-        price: 2800000,
-        duration: "3 ngày 2 đêm",
-        location: "Khánh Hòa",
-        category: "Biển đảo",
-        rating: 4.6,
-        available: true,
-        originalPrice: 3200000,
-        discount: 13,
-    },
-    {
-        id: 7,
-        title: "Cao Bằng Waterfall Adventure",
-        description:
-            "Khám phá thác Bản Giốc hùng vĩ và động Ngườm Ngao kỳ bí. Trải nghiệm vẻ đẹp hoang sơ của vùng biên ải Đông Bắc Việt Nam.",
-        image: "https://res.klook.com/image/upload/w_750,h_469,c_fill,q_85/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/ffzdzkijtcql9ra8g0xe.webp",
-        price: 2100000,
-        duration: "3 ngày 2 đêm",
-        location: "Cao Bằng",
-        category: "Miền núi",
-        rating: 4.4,
-        available: true,
-        originalPrice: 2400000,
-        discount: 13,
-    },
-    {
-        id: 8,
-        title: "Mekong Delta Discovery",
-        description:
-            "Khám phá miền Tây sông nước với chợ nổi Cái Răng, vườn trái cây và làng nghề truyền thống. Trải nghiệm cuộc sống người dân miền Tây Nam Bộ.",
-        image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400&h=250&fit=crop",
-        price: 1650000,
-        duration: "2 ngày 1 đêm",
-        location: "Cần Thơ",
-        category: "Văn hóa",
-        rating: 4.3,
-        available: true,
-        originalPrice: 1900000,
-        discount: 13,
-    },
-    {
-        id: 9,
-        title: "Ho Chi Minh City Explorer",
-        description:
-            "Khám phá Thành phố Hồ Chí Minh năng động với các di tích lịch sử, chợ Bến Thành, địa đạo Củ Chi và ẩm thực phố đường phong phú.",
-        image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=250&fit=crop",
-        price: 1400000,
-        duration: "2 ngày 1 đêm",
-        location: "TP. Hồ Chí Minh",
-        category: "Thành phố",
-        rating: 4.2,
-        available: true,
-        originalPrice: 1600000,
-        discount: 13,
-    },
-];
-
-const categories = ["Biển đảo", "Miền núi", "Văn hóa", "Thành phố"];
+const mockTours = TOURS;
+const categories = TOUR_CATEGORIES;
 const sortOptions = [
     { value: "name", label: "Tên A-Z" },
     { value: "price-low", label: "Giá thấp đến cao" },
@@ -207,6 +71,7 @@ const SlideUpTransition = React.forwardRef(function Transition(props, ref) {
 
 const Tours = () => {
     const { tours, setTours } = useAppStore();
+    const navigate = useNavigate();
 
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -230,14 +95,12 @@ const Tours = () => {
         // Initialize tours data and simulate loading
         setLoading(true);
         const timer = setTimeout(() => {
-            if (tours.length === 0) {
-                setTours(mockTours);
-            }
+            setTours(TOURS);
             setLoading(false);
-        }, 800);
+        }, 400);
 
         return () => clearTimeout(timer);
-    }, [tours.length, setTours]);
+    }, [setTours]);
 
     // Handle favorite toggle
     const toggleFavorite = (tourId) => {
@@ -272,6 +135,7 @@ const Tours = () => {
             const matchesPriceRange = (() => {
                 if (priceRange === "") return true;
                 const price = tour.price;
+                if (!price) return false;
                 switch (priceRange) {
                     case "under-5":
                         return price < 5000000;
@@ -287,7 +151,11 @@ const Tours = () => {
             })();
 
             // Other filters (placeholder for future expansion)
-            const matchesDestination = selectedDestination === "" || true;
+            const matchesDestination =
+                selectedDestination === "" ||
+                (tour.departure || "")
+                    .toLowerCase()
+                    .includes(selectedDestination.toLowerCase());
             const matchesDepartureDate = departureDate === "" || true;
             const matchesTourType = tourType === "" || true;
             const matchesTransportation = transportation === "" || true;
@@ -344,6 +212,7 @@ const Tours = () => {
     const totalPages = Math.ceil(filteredAndSortedTours.length / toursPerPage);
 
     const formatPrice = (price) => {
+        if (!price) return "Liên hệ";
         return new Intl.NumberFormat("vi-VN", {
             style: "currency",
             currency: "VND",
@@ -356,31 +225,35 @@ const Tours = () => {
     };
 
     return (
-        <Box sx={{ 
-            backgroundColor: "#f8fafc", 
-            minHeight: "100vh", 
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "flex-start"
-        }}>
-            <Container 
-                maxWidth="xl" 
-                sx={{ 
-                    py: 4, 
-                    pb: { xs: 10, md: 4 },
+        <Box
+            sx={{
+                backgroundColor: "#f8fafc",
+                minHeight: "100vh",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-start",
+            }}
+        >
+            <Container
+                maxWidth="xl"
+                sx={{
+                    py: { xs: 3, md: 5 },
+                    pb: { xs: 8, md: 5 },
                     mx: "auto",
                     px: { xs: 2, sm: 3, md: 4 },
                     width: "100%",
-                    maxWidth: "1400px"
+                    maxWidth: "1400px",
                 }}
             >
-                <Grid container spacing={3} sx={{ width: "100%", margin: 0, justifyContent: "center" }}>
+                <Grid
+                    container
+                    spacing={3}
+                    sx={{ width: "100%", margin: 0, justifyContent: "center" }}
+                >
                     {/* Left Sidebar - Filter Panel - Hidden on Mobile */}
                     <Grid
-                        item
-                        xs={12}
-                        md={3}
+                        size={{ xs: 12, md: 3 }}
                         sx={{ display: { xs: "none", md: "block" } }}
                     >
                         <Paper
@@ -391,7 +264,7 @@ const Tours = () => {
                                 backgroundColor: "white",
                                 border: "1px solid #e2e8f0",
                                 position: "sticky",
-                                top: 120,
+                                top: 180,
                                 maxHeight: "calc(100vh - 140px)",
                                 overflowY: "auto",
                                 "&::-webkit-scrollbar": {
@@ -454,7 +327,7 @@ const Tours = () => {
                                             range: [20000000, Infinity],
                                         },
                                     ].map((option) => (
-                                        <Grid item xs={6} key={option.value}>
+                                        <Grid size={{ xs: 6 }} key={option.value}>
                                             <Button
                                                 variant={
                                                     priceRange === option.value
@@ -534,22 +407,22 @@ const Tours = () => {
                                             Tất cả
                                         </MenuItem>
                                         <MenuItem
-                                            value="hanoi"
+                                            value="Hà Nội"
                                             sx={{ fontSize: "14px" }}
                                         >
                                             Hà Nội
                                         </MenuItem>
                                         <MenuItem
-                                            value="hcm"
+                                            value="Lào Cai"
                                             sx={{ fontSize: "14px" }}
                                         >
-                                            TP. Hồ Chí Minh
+                                            Lào Cai
                                         </MenuItem>
                                         <MenuItem
-                                            value="danang"
+                                            value="Móng Cái"
                                             sx={{ fontSize: "14px" }}
                                         >
-                                            Đà Nẵng
+                                            Móng Cái
                                         </MenuItem>
                                     </Select>
                                 </FormControl>
@@ -588,7 +461,7 @@ const Tours = () => {
                                             value=""
                                             sx={{ fontSize: "14px" }}
                                         >
-                                            Đà Nẵng
+                                            Tất cả
                                         </MenuItem>
                                         {categories.map((category) => (
                                             <MenuItem
@@ -681,7 +554,7 @@ const Tours = () => {
                                             icon: <OfferIcon />,
                                         },
                                     ].map((option) => (
-                                        <Grid item xs={6} key={option.value}>
+                                        <Grid size={{ xs: 6 }} key={option.value}>
                                             <Button
                                                 variant={
                                                     tourType === option.value
@@ -749,7 +622,7 @@ const Tours = () => {
                                             icon: <FlightIcon />,
                                         },
                                     ].map((option) => (
-                                        <Grid item xs={6} key={option.value}>
+                                        <Grid size={{ xs: 6 }} key={option.value}>
                                             <Button
                                                 variant={
                                                     transportation ===
@@ -823,13 +696,15 @@ const Tours = () => {
                     </Grid>
 
                     {/* Right Content - Search & Tours */}
-                    <Grid item xs={12} md={9}>
+                    <Grid size={{ xs: 12, md: 9 }}>
                         {/* Results Header */}
                         <Box
                             sx={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                alignItems: "center",
+                                alignItems: { xs: "flex-start", md: "center" },
+                                flexWrap: "wrap",
+                                gap: 1.5,
                                 mb: 3,
                             }}
                         >
@@ -837,8 +712,9 @@ const Tours = () => {
                                 variant="body1"
                                 sx={{
                                     color: "#475569",
-                                    fontSize: "16px",
-                                    fontWeight: 500,
+                                    fontSize: { xs: "0.9rem", md: "16px" },
+                                    lineHeight: 1.5,
+                                    pr: 1,
                                 }}
                             >
                                 Chúng tôi tìm thấy{" "}
@@ -1089,7 +965,7 @@ const Tours = () => {
                                                         )}
                                                     </IconButton>
 
-                                                    {/* Tiết kiệm Badge */}
+                                                    {tour.discount ? (
                                                     <Box
                                                         sx={{
                                                             position:
@@ -1113,6 +989,26 @@ const Tours = () => {
                                                         <OfferIcon fontSize="small" />
                                                         Tiết kiệm
                                                     </Box>
+                                                    ) : tour.noShopping ? (
+                                                    <Box
+                                                        sx={{
+                                                            position:
+                                                                "absolute",
+                                                            bottom: 12,
+                                                            left: 12,
+                                                            backgroundColor:
+                                                                "#0f766e",
+                                                            color: "white",
+                                                            px: 1.5,
+                                                            py: 0.5,
+                                                            borderRadius: 2,
+                                                            fontSize: "12px",
+                                                            fontWeight: 600,
+                                                        }}
+                                                    >
+                                                        No shopping
+                                                    </Box>
+                                                    ) : null}
                                                 </Box>
 
                                                 {/* Content Section */}
@@ -1162,9 +1058,10 @@ const Tours = () => {
                                                             }}
                                                         >
                                                             <Grid
-                                                                item
-                                                                xs={12}
-                                                                sm={6}
+                                                                size={{
+                                                                    xs: 12,
+                                                                    sm: 6,
+                                                                }}
                                                             >
                                                                 <Box
                                                                     sx={{
@@ -1305,9 +1202,10 @@ const Tours = () => {
                                                                 </Box>
                                                             </Grid>
                                                             <Grid
-                                                                item
-                                                                xs={12}
-                                                                sm={6}
+                                                                size={{
+                                                                    xs: 12,
+                                                                    sm: 6,
+                                                                }}
                                                             >
                                                                 <Box
                                                                     sx={{
@@ -1533,6 +1431,11 @@ const Tours = () => {
                                                         </Box>
                                                         <Button
                                                             variant="contained"
+                                                            onClick={() =>
+                                                                navigate(
+                                                                    `/tours/${tour.id}`
+                                                                )
+                                                            }
                                                             sx={{
                                                                 backgroundColor:
                                                                     "#1976d2",
@@ -1627,9 +1530,10 @@ const Tours = () => {
                     right: 0,
                     backgroundColor: "white",
                     borderTop: "1px solid #e2e8f0",
-                    p: 2,
+                    p: 1.5,
+                    pr: 9,
                     gap: 1,
-                    zIndex: 1000,
+                    zIndex: 1100,
                 }}
             >
                 <Button
@@ -1753,7 +1657,7 @@ const Tours = () => {
                                 { label: "Từ 10 - 20 triệu", value: "10-20" },
                                 { label: "Trên 20 triệu", value: "over-20" },
                             ].map((option) => (
-                                <Grid item xs={6} key={option.value}>
+                                <Grid size={{ xs: 6 }} key={option.value}>
                                     <Button
                                         variant={
                                             priceRange === option.value
@@ -1817,9 +1721,9 @@ const Tours = () => {
                                 endIcon={<ExpandMoreIcon />}
                             >
                                 <MenuItem value="">Tất cả</MenuItem>
-                                <MenuItem value="hanoi">Hà Nội</MenuItem>
-                                <MenuItem value="hcm">TP. Hồ Chí Minh</MenuItem>
-                                <MenuItem value="danang">Đà Nẵng</MenuItem>
+                                <MenuItem value="Hà Nội">Hà Nội</MenuItem>
+                                <MenuItem value="Lào Cai">Lào Cai</MenuItem>
+                                <MenuItem value="Móng Cái">Móng Cái</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>
@@ -1850,7 +1754,7 @@ const Tours = () => {
                                 }}
                                 endIcon={<ExpandMoreIcon />}
                             >
-                                <MenuItem value="">Đà Nẵng</MenuItem>
+                                <MenuItem value="">Tất cả</MenuItem>
                                 {categories.map((category) => (
                                     <MenuItem key={category} value={category}>
                                         {category}
@@ -1880,7 +1784,7 @@ const Tours = () => {
                                 { label: "Tiết kiệm", value: "budget" },
                                 { label: "Giá tốt", value: "deal" },
                             ].map((option) => (
-                                <Grid item xs={6} key={option.value}>
+                                <Grid size={{ xs: 6 }} key={option.value}>
                                     <Button
                                         variant={
                                             tourType === option.value
@@ -1943,7 +1847,7 @@ const Tours = () => {
                                     icon: <FlightIcon />,
                                 },
                             ].map((option) => (
-                                <Grid item xs={6} key={option.value}>
+                                <Grid size={{ xs: 6 }} key={option.value}>
                                     <Button
                                         variant={
                                             transportation === option.value

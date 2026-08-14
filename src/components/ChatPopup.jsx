@@ -19,7 +19,7 @@ const ChatPopup = () => {
             id: "facebook",
             name: "Facebook",
             color: "#1877F2",
-            href: "https://facebook.com/traveltoursvn",
+            href: "https://www.facebook.com/Baongoctravel24",
             icon: FacebookIcon,
             bgColor: "#1877F2",
         },
@@ -27,7 +27,7 @@ const ChatPopup = () => {
             id: "zalo",
             name: "Zalo",
             color: "#0068FF",
-            href: "https://zalo.me/0123456789",
+            href: "https://zalo.me/0786262222",
             icon: (props) => (
                 <Box
                     component="img"
@@ -71,8 +71,8 @@ const ChatPopup = () => {
             <Box
                 sx={{
                     position: "fixed",
-                    bottom: 24,
-                    right: 24,
+                    bottom: { xs: 16, md: 24 },
+                    right: { xs: 16, md: 24 },
                     zIndex: 1000,
                     display: "flex",
                     flexDirection: "column",
@@ -118,16 +118,87 @@ const ChatPopup = () => {
                                     : `${
                                           (chatOptions.length - index - 1) * 40
                                       }ms`,
+                                // Wave animation khi expanded
+                                animation: isExpanded
+                                    ? `chatButtonWave 3s ease-in-out ${
+                                          index * 0.3
+                                      }s infinite`
+                                    : "none",
+                                // Keyframes cho wave effect
+                                "@keyframes chatButtonWave": {
+                                    "0%, 100%": {
+                                        transform:
+                                            "translateY(0) scale(1) rotate(0deg)",
+                                        boxShadow: `0 4px 15px ${alpha(
+                                            option.color,
+                                            0.2
+                                        )}`,
+                                    },
+                                    "25%": {
+                                        transform:
+                                            "translateY(-2px) scale(1.02) rotate(1deg)",
+                                        boxShadow: `0 6px 20px ${alpha(
+                                            option.color,
+                                            0.3
+                                        )}`,
+                                    },
+                                    "50%": {
+                                        transform:
+                                            "translateY(-1px) scale(1.01) rotate(0deg)",
+                                        boxShadow: `0 8px 25px ${alpha(
+                                            option.color,
+                                            0.4
+                                        )}`,
+                                    },
+                                    "75%": {
+                                        transform:
+                                            "translateY(-2px) scale(1.02) rotate(-1deg)",
+                                        boxShadow: `0 6px 20px ${alpha(
+                                            option.color,
+                                            0.3
+                                        )}`,
+                                    },
+                                },
                                 "&:hover": {
                                     transform: isExpanded
-                                        ? "translateY(-3px) scale(1.15) rotate(5deg)"
+                                        ? "translateY(-5px) scale(1.15) rotate(5deg)"
                                         : "translateY(20px) scale(0.8) rotate(-10deg)",
-                                    boxShadow: `0 12px 35px ${alpha(
+                                    boxShadow: `0 15px 40px ${alpha(
                                         option.color,
-                                        0.5
+                                        0.6
                                     )}`,
                                     transition:
                                         "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                                    animation: isExpanded ? "none" : "none", // Tạm dừng wave khi hover
+                                    "&::before": {
+                                        content: '""',
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: "120%",
+                                        height: "120%",
+                                        borderRadius: "50%",
+                                        background: `radial-gradient(circle, ${alpha(
+                                            option.color,
+                                            0.1
+                                        )} 0%, transparent 70%)`,
+                                        animation:
+                                            "rippleWave 1.5s ease-out infinite",
+                                        zIndex: -1,
+                                    },
+                                    "@keyframes rippleWave": {
+                                        "0%": {
+                                            transform:
+                                                "translate(-50%, -50%) scale(0.8)",
+                                            opacity: 0.8,
+                                        },
+                                        "100%": {
+                                            transform:
+                                                "translate(-50%, -50%) scale(2)",
+                                            opacity: 0,
+                                        },
+                                    },
                                 },
                                 "&:active": {
                                     transform: isExpanded
@@ -142,6 +213,25 @@ const ChatPopup = () => {
                                     transform: isExpanded
                                         ? "rotate(0deg)"
                                         : "rotate(-20deg)",
+                                    animation: isExpanded
+                                        ? `iconFloat 4s ease-in-out ${
+                                              index * 0.2
+                                          }s infinite`
+                                        : "none",
+                                    "@keyframes iconFloat": {
+                                        "0%, 100%": {
+                                            transform:
+                                                "rotate(0deg) translateY(0px)",
+                                        },
+                                        "33%": {
+                                            transform:
+                                                "rotate(2deg) translateY(-1px)",
+                                        },
+                                        "66%": {
+                                            transform:
+                                                "rotate(-2deg) translateY(1px)",
+                                        },
+                                    },
                                 },
                             }}
                             onClick={() => handleChatClick(option)}

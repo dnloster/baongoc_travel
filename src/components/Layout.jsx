@@ -15,6 +15,8 @@ const Layout = () => {
                 display: "flex",
                 flexDirection: "column",
                 minHeight: "100vh",
+                width: "100%",
+                overflowX: "hidden",
             }}
         >
             <Header />
@@ -22,22 +24,18 @@ const Layout = () => {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    // Responsive padding-top for non-home pages to prevent header overlap
+                    width: "100%",
+                    minWidth: 0,
                     paddingTop: isHomePage
                         ? 0
-                        : { xs: "70px", sm: "80px", md: "100px" },
-                    // Add responsive horizontal padding
-                    px: { xs: 0, sm: 0 }, // Let individual components handle padding
+                        : { xs: "64px", sm: "64px", md: "80px" },
                     display: "flex",
                     justifyContent: "center",
-                    width: "100%"
                 }}
             >
                 <Outlet />
             </Box>
             <Footer />
-
-            {/* Global Chat Popup */}
             <ChatPopup />
         </Box>
     );

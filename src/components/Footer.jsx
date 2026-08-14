@@ -10,16 +10,13 @@ import {
 } from "@mui/material";
 import {
     Facebook as FacebookIcon,
-    Instagram as InstagramIcon,
-    Twitter as TwitterIcon,
-    YouTube as YouTubeIcon,
     Phone as PhoneIcon,
     Email as EmailIcon,
     LocationOn as LocationIcon,
-    Flight as FlightIcon,
+    WhatsApp,
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
-import Logo from "../assets/logo_PNG/logo-color1.png";
+import Logo from "../assets/icon_png/BN1.png";
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
@@ -32,10 +29,10 @@ const Footer = () => {
     ];
 
     const tourCategories = [
-        { label: "Tour biển đảo", path: "/tours?category=beach" },
-        { label: "Tour miền núi", path: "/tours?category=mountain" },
-        { label: "Tour văn hóa", path: "/tours?category=culture" },
-        { label: "Tour thành phố", path: "/tours?category=city" },
+        { label: "Tour Vân Nam", path: "/tours" },
+        { label: "Tour Hồng Hà", path: "/tours" },
+        { label: "Tour Hà Khẩu", path: "/tours" },
+        { label: "Tour Quảng Tây", path: "/tours" },
     ];
 
     const services = [
@@ -48,23 +45,13 @@ const Footer = () => {
     const socialLinks = [
         {
             icon: <FacebookIcon />,
-            url: "https://facebook.com/traveltours",
+            url: "https://www.facebook.com/Baongoctravel24",
             label: "Facebook",
         },
         {
-            icon: <InstagramIcon />,
-            url: "https://instagram.com/traveltours",
-            label: "Instagram",
-        },
-        {
-            icon: <TwitterIcon />,
-            url: "https://twitter.com/traveltours",
-            label: "Twitter",
-        },
-        {
-            icon: <YouTubeIcon />,
-            url: "https://youtube.com/traveltours",
-            label: "YouTube",
+            icon: <WhatsApp />,
+            url: "https://wa.me/+84786262222",
+            label: "WhatsApp",
         },
     ];
 
@@ -74,15 +61,15 @@ const Footer = () => {
             sx={{
                 backgroundColor: "grey.900",
                 color: "white",
-                pt: 6,
+                pt: { xs: 5, md: 6 },
                 pb: 2,
                 mt: "auto",
             }}
         >
-            <Container maxWidth="lg">
-                <Grid container spacing={4}>
+            <Container maxWidth="lg" sx={{ px: { xs: 2, sm: 3 } }}>
+                <Grid container spacing={{ xs: 3, md: 4 }}>
                     {/* Company Info */}
-                    <Grid item xs={12} md={3}>
+                    <Grid size={{ xs: 12, md: 3 }}>
                         <Box
                             sx={{
                                 display: "flex",
@@ -90,7 +77,17 @@ const Footer = () => {
                                 mb: 2,
                             }}
                         >
-                            <img src={Logo} alt="Bảo Ngọc Travel" width={300}/>
+                            <Box
+                                component="img"
+                                src={Logo}
+                                alt="Bảo Ngọc Travel"
+                                sx={{
+                                    width: { xs: 180, sm: 220, md: 240 },
+                                    maxWidth: "100%",
+                                    height: "auto",
+                                    display: "block",
+                                }}
+                            />
                         </Box>
                         <Typography variant="body2" paragraph>
                             Đối tác tin cậy cho mọi chuyến đi. Chúng tôi mang
@@ -108,7 +105,7 @@ const Footer = () => {
                             >
                                 <PhoneIcon sx={{ fontSize: 16, mr: 1 }} />
                                 <Typography variant="body2">
-                                    (+84) 123 456 789
+                                    (+84) 78 626 2222
                                 </Typography>
                             </Box>
                             <Box
@@ -119,8 +116,8 @@ const Footer = () => {
                                 }}
                             >
                                 <EmailIcon sx={{ fontSize: 16, mr: 1 }} />
-                                <Typography variant="body2">
-                                    info@traveltours.vn
+                                <Typography variant="body2" sx={{ wordBreak: "break-word" }}>
+                                    Baongoctravel24@gmail.com
                                 </Typography>
                             </Box>
                             <Box
@@ -134,7 +131,8 @@ const Footer = () => {
                                     sx={{ fontSize: 16, mr: 1, mt: 0.2 }}
                                 />
                                 <Typography variant="body2">
-                                    123 Đường ABC, Quận 1, TP.HCM
+                                    051 Nguyễn Trung Trực, phường Lào Cai, tỉnh
+                                    Lào Cai
                                 </Typography>
                             </Box>
                         </Box>
@@ -162,7 +160,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Quick Links */}
-                    <Grid item xs={12} sm={6} md={3} sx={{ pt: { md: 12 } }}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }}>
                         <Typography variant="h6" gutterBottom>
                             Liên kết nhanh
                         </Typography>
@@ -189,7 +187,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Tour Categories */}
-                    <Grid item xs={12} sm={6} md={3} sx={{ pt: { md: 12 } }}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }}>
                         <Typography variant="h6" gutterBottom>
                             Loại tour
                         </Typography>
@@ -216,7 +214,7 @@ const Footer = () => {
                     </Grid>
 
                     {/* Services */}
-                    <Grid item xs={12} sm={6} md={3} sx={{ pt: { md: 12 } }}>
+                    <Grid size={{ xs: 6, sm: 4, md: 3 }}>
                         <Typography variant="h6" gutterBottom>
                             Dịch vụ
                         </Typography>
@@ -252,10 +250,14 @@ const Footer = () => {
                         flexDirection: { xs: "column", sm: "row" },
                         justifyContent: "space-between",
                         alignItems: "center",
+                        flexWrap: "wrap",
+                        gap: 1,
+                        textAlign: { xs: "center", sm: "left" },
                     }}
                 >
                     <Typography variant="body2" color="grey.400">
-                        © {currentYear} Bảo Ngọc Travel. Tất cả quyền được bảo lưu.
+                        © {currentYear} Bảo Ngọc Travel. Tất cả quyền được bảo
+                        lưu.
                     </Typography>
                     <Box sx={{ display: "flex", gap: 2, mt: { xs: 1, sm: 0 } }}>
                         <Link

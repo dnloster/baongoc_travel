@@ -27,7 +27,7 @@ import { vi } from "date-fns/locale/vi";
 import Swal from "sweetalert2";
 import ChinaTourIcon from "../assets/icon_flag/china.png";
 import VietnamTourIcon from "../assets/icon_flag/vietnam.png";
-import Logo from "../assets/logo_PNG/logo-main.png";
+import Logo from "../assets/icon_png/BN3.png";
 import "../styles/sweetalert-custom.css";
 
 const SlideUpTransition = React.forwardRef(function Transition(props, ref) {
@@ -80,20 +80,10 @@ const MobileSearchPrompt = () => {
         "Trên 5 triệu",
     ];
 
+    // Order arranged so that on small screens (2 columns) the top row
+    // shows Vietnam (left) and China (right), and the bottom row shows
+    // Visa (left) and Passport (right).
     const searchButtons = [
-        {
-            id: "china-tour",
-            label: "Du lịch Trung Quốc",
-            icon: (
-                <img
-                    src={ChinaTourIcon}
-                    alt="China"
-                    style={{ width: 28, height: 28 }}
-                />
-            ),
-            color: "#d32f2f",
-            modalTitle: "🇨🇳 TOUR DU LỊCH TRUNG QUỐC",
-        },
         {
             id: "vietnam-tour",
             label: "Du lịch Việt Nam",
@@ -106,6 +96,19 @@ const MobileSearchPrompt = () => {
             ),
             color: "#1976d2",
             modalTitle: "🇻🇳 TOUR DU LỊCH VIỆT NAM",
+        },
+        {
+            id: "china-tour",
+            label: "Du lịch Trung Quốc",
+            icon: (
+                <img
+                    src={ChinaTourIcon}
+                    alt="China"
+                    style={{ width: 28, height: 28 }}
+                />
+            ),
+            color: "#d32f2f",
+            modalTitle: "🇨🇳 TOUR DU LỊCH TRUNG QUỐC",
         },
         {
             id: "visa",
@@ -304,7 +307,7 @@ const MobileSearchPrompt = () => {
                     >
                         <Grid container spacing={3}>
                             {/* Destination */}
-                            <Grid item xs={12}>
+                            <Grid size={12}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
@@ -346,7 +349,7 @@ const MobileSearchPrompt = () => {
                             </Grid>
 
                             {/* Departure Date */}
-                            <Grid item xs={12}>
+                            <Grid size={12}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
@@ -380,7 +383,7 @@ const MobileSearchPrompt = () => {
                             </Grid>
 
                             {/* Price Range */}
-                            <Grid item xs={12}>
+                            <Grid size={12}>
                                 <Typography
                                     variant="body2"
                                     color="text.secondary"
@@ -417,7 +420,7 @@ const MobileSearchPrompt = () => {
                             </Grid>
 
                             {/* Search Button */}
-                            <Grid item xs={12}>
+                            <Grid size={12}>
                                 <Button
                                     variant="contained"
                                     fullWidth
@@ -451,43 +454,44 @@ const MobileSearchPrompt = () => {
             <Box
                 sx={{
                     position: "absolute",
-                    bottom: 20,
+                    bottom: 16,
                     left: "50%",
                     transform: "translateX(-50%)",
                     zIndex: 20,
-                    display: { xs: "block", md: "none" }, // Only show on mobile
+                    display: { xs: "block", md: "none" },
+                    width: "calc(100% - 24px)",
+                    maxWidth: 420,
                 }}
             >
-                <Grid container spacing={1} justifyContent="center">
+                <Grid container spacing={1}>
                     {searchButtons.map((button) => (
-                        <Grid item xs={6} key={button.id}>
+                        <Grid size={{ xs: 6 }} key={button.id}>
                             <Button
                                 variant="contained"
-                                fullWidth
                                 onClick={() => handleButtonClick(button.id)}
                                 startIcon={button.icon}
                                 sx={{
                                     bgcolor: "rgba(255,255,255,0.95)",
                                     color: button.color,
                                     backdropFilter: "blur(10px)",
-                                    border: `2px solid ${button.color}`,
-                                    py: 1.5,
+                                    border: `1.5px solid ${button.color}`,
+                                    minHeight: 52,
+                                    width: "100%",
                                     px: 1,
-                                    fontSize: "0.8rem",
+                                    py: 1,
+                                    fontSize: { xs: "0.72rem", sm: "0.82rem" },
                                     fontWeight: 600,
-                                    borderRadius: 3,
+                                    borderRadius: 2,
                                     textTransform: "none",
-                                    boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+                                    boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
+                                    lineHeight: 1.2,
                                     "&:hover": {
                                         bgcolor: button.color,
                                         color: "white",
-                                        transform: "translateY(-2px)",
-                                        boxShadow: "0 6px 25px rgba(0,0,0,0.2)",
                                     },
-                                    transition:
-                                        "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                                     "& .MuiButton-startIcon": {
-                                        marginRight: 0.5,
+                                        mr: 0.5,
+                                        ml: 0,
                                     },
                                 }}
                             >

@@ -111,9 +111,27 @@ section {
     display: block;
 }
 
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 body {
-    line-height: 1;
+    line-height: 1.5;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    overflow-x: hidden;
+    background-color: #f8fafc;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+#root {
+    overflow-x: hidden;
+    min-width: 0;
 }
 
 ol,

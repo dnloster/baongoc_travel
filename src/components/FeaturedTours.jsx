@@ -20,6 +20,7 @@ import {
     People as PeopleIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { TOURS } from "../data/tours";
 
 const FeaturedTours = ({
     tours,
@@ -29,114 +30,14 @@ const FeaturedTours = ({
     showBackground = true,
 }) => {
     const navigate = useNavigate();
-
-    const defaultTours = [
-        {
-            id: 1,
-            title: "Hạ Long Bay Adventure",
-            description:
-                "Khám phá vẻ đẹp kỳ diệu của Vịnh Hạ Long với tour 3 ngày 2 đêm",
-            image: "https://images.unsplash.com/photo-1669819894338-53ab7afc6958?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1741",
-            price: "2,500,000",
-            originalPrice: "3,000,000",
-            duration: "3 ngày 2 đêm",
-            location: "Quảng Ninh",
-            rating: 4.8,
-            reviews: 156,
-            maxGuests: 20,
-            category: "Thiên nhiên",
-            discount: 17,
-        },
-        {
-            id: 2,
-            title: "Sapa Highland Trek",
-            description:
-                "Trải nghiệm văn hóa và thiên nhiên tuyệt đẹp tại Sapa",
-            image: "https://images.pexels.com/photos/6876737/pexels-photo-6876737.jpeg",
-            price: "1,800,000",
-            originalPrice: "2,200,000",
-            duration: "2 ngày 1 đêm",
-            location: "Lào Cai",
-            rating: 4.6,
-            reviews: 89,
-            maxGuests: 15,
-            category: "Văn hóa",
-            discount: 18,
-        },
-        {
-            id: 3,
-            title: "Phú Quốc Island",
-            description:
-                "Nghỉ dưỡng tại đảo ngọc Phú Quốc với bãi biển tuyệt đẹp",
-            image: "https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg",
-            price: "3,200,000",
-            originalPrice: "3,800,000",
-            duration: "4 ngày 3 đêm",
-            location: "Kiên Giang",
-            rating: 4.9,
-            reviews: 203,
-            maxGuests: 25,
-            category: "Biển đảo",
-            discount: 16,
-        },
-        {
-            id: 4,
-            title: "Bắc Kinh - Thủ Đô Ngàn Năm",
-            description:
-                "Khám phá Tử Cấm Thành, Vạn Lý Trường Thành và văn hóa cổ xưa",
-            image: "https://images.pexels.com/photos/2846030/pexels-photo-2846030.jpeg",
-            price: "4,500,000",
-            originalPrice: "5,200,000",
-            duration: "5 ngày 4 đêm",
-            location: "Trung Quốc",
-            rating: 4.7,
-            reviews: 124,
-            maxGuests: 18,
-            category: "Lịch sử",
-            discount: 13,
-        },
-        {
-            id: 5,
-            title: "Thượng Hải - Thành Phố Hiện Đại",
-            description:
-                "Trải nghiệm sự kết hợp hoàn hảo giữa truyền thống và hiện đại",
-            image: "https://images.pexels.com/photos/33625670/pexels-photo-33625670.jpeg",
-            price: "3,800,000",
-            originalPrice: "4,300,000",
-            duration: "4 ngày 3 đêm",
-            location: "Trung Quốc",
-            rating: 4.5,
-            reviews: 97,
-            maxGuests: 22,
-            category: "Thành phố",
-            discount: 12,
-        },
-        {
-            id: 6,
-            title: "Cửu Trại Câu - Tiên Cảnh Trần Gian",
-            description:
-                "Chiêm ngưỡng vẻ đẹp tuyệt vời của hồ nước trong xanh và thác nước",
-            image: "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/10/24/1411989/399216707_6478483805.jpg",
-            price: "5,200,000",
-            originalPrice: "6,000,000",
-            duration: "6 ngày 5 đêm",
-            location: "Trung Quốc",
-            rating: 4.9,
-            reviews: 167,
-            maxGuests: 16,
-            category: "Thiên nhiên",
-            discount: 13,
-        },
-    ];
-
-    const displayTours = tours || defaultTours;
+    const displayTours = tours || TOURS.slice(0, 6);
 
     const content = (
-        <Container 
-            maxWidth="lg" 
-            sx={{ 
+        <Container
+            maxWidth="lg"
+            sx={{
                 px: { xs: 1, sm: 2, md: 3 },
-                py: { xs: 2, md: 4 }
+                py: { xs: 2, md: 4 },
             }}
         >
             {/* Header Section */}
@@ -156,10 +57,10 @@ const FeaturedTours = ({
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         mb: 2,
-                        fontSize: { 
-                            xs: "1.5rem", 
-                            sm: "1.8rem", 
-                            md: "3rem" 
+                        fontSize: {
+                            xs: "1.5rem",
+                            sm: "1.8rem",
+                            md: "3rem",
                         },
                     }}
                 >
@@ -194,9 +95,9 @@ const FeaturedTours = ({
             <Grid
                 container
                 spacing={{ xs: 2, sm: 3, md: 4 }}
-                sx={{ 
+                sx={{
                     px: { xs: 0, sm: 0 },
-                    mt: { xs: 2, md: 4 }
+                    mt: { xs: 2, md: 4 },
                 }}
             >
                 {displayTours.map((tour) => (
@@ -210,10 +111,13 @@ const FeaturedTours = ({
                                 transition:
                                     "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                                 "&:hover": {
-                                    transform: { xs: "none", md: "translateY(-8px)" },
-                                    boxShadow: { 
-                                        xs: "0 8px 25px rgba(0,0,0,0.08)", 
-                                        md: "0 20px 40px rgba(0,0,0,0.12)" 
+                                    transform: {
+                                        xs: "none",
+                                        md: "translateY(-8px)",
+                                    },
+                                    boxShadow: {
+                                        xs: "0 8px 25px rgba(0,0,0,0.08)",
+                                        md: "0 20px 40px rgba(0,0,0,0.12)",
                                     },
                                 },
                                 position: "relative",
@@ -233,7 +137,10 @@ const FeaturedTours = ({
                                         left: { xs: 8, md: 12 },
                                         zIndex: 2,
                                         fontWeight: "bold",
-                                        fontSize: { xs: "0.7rem", md: "0.75rem" },
+                                        fontSize: {
+                                            xs: "0.7rem",
+                                            md: "0.75rem",
+                                        },
                                     }}
                                 />
                             )}
@@ -266,7 +173,10 @@ const FeaturedTours = ({
                                     transition: "transform 0.3s ease",
                                     height: { xs: 180, sm: 200, md: 220 },
                                     "&:hover": {
-                                        transform: { xs: "none", md: "scale(1.05)" },
+                                        transform: {
+                                            xs: "none",
+                                            md: "scale(1.05)",
+                                        },
                                     },
                                 }}
                             />
@@ -295,7 +205,12 @@ const FeaturedTours = ({
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
-                                        sx={{ fontSize: { xs: "0.75rem", md: "0.875rem" } }}
+                                        sx={{
+                                            fontSize: {
+                                                xs: "0.75rem",
+                                                md: "0.875rem",
+                                            },
+                                        }}
                                     >
                                         {tour.location}
                                     </Typography>
@@ -332,19 +247,28 @@ const FeaturedTours = ({
                                         precision={0.1}
                                         size="small"
                                         readOnly
-                                        sx={{ 
+                                        sx={{
                                             mr: 1,
-                                            fontSize: { xs: "1rem", md: "1.2rem" }
+                                            fontSize: {
+                                                xs: "1rem",
+                                                md: "1.2rem",
+                                            },
                                         }}
                                     />
                                     <Typography
                                         variant="body2"
                                         color="text.secondary"
-                                        sx={{ 
-                                            fontSize: { xs: "0.75rem", md: "0.875rem" }
+                                        sx={{
+                                            fontSize: {
+                                                xs: "0.75rem",
+                                                md: "0.875rem",
+                                            },
                                         }}
                                     >
-                                        {tour.rating} ({tour.reviews} đánh giá)
+                                        {tour.rating}
+                                        {tour.reviews
+                                            ? ` (${tour.reviews} đánh giá)`
+                                            : ""}
                                     </Typography>
                                 </Box>
 
@@ -361,7 +285,7 @@ const FeaturedTours = ({
                                             xs: "0.8rem",
                                             md: "0.875rem",
                                         },
-                                        display: { xs: "none", sm: "block" }
+                                        display: { xs: "none", sm: "block" },
                                     }}
                                 >
                                     {tour.description}
@@ -385,9 +309,12 @@ const FeaturedTours = ({
                                         />
                                         <Typography
                                             variant="body2"
-                                            sx={{ 
+                                            sx={{
                                                 fontWeight: 500,
-                                                fontSize: { xs: "0.8rem", md: "0.875rem" }
+                                                fontSize: {
+                                                    xs: "0.8rem",
+                                                    md: "0.875rem",
+                                                },
                                             }}
                                         >
                                             {tour.duration}
@@ -403,12 +330,15 @@ const FeaturedTours = ({
                                         />
                                         <Typography
                                             variant="body2"
-                                            sx={{ 
+                                            sx={{
                                                 fontWeight: 500,
-                                                fontSize: { xs: "0.8rem", md: "0.875rem" }
+                                                fontSize: {
+                                                    xs: "0.8rem",
+                                                    md: "0.875rem",
+                                                },
                                             }}
                                         >
-                                            Tối đa {tour.maxGuests} người
+                                            {tour.transport || tour.duration}
                                         </Typography>
                                     </Box>
                                 </Box>
@@ -422,7 +352,10 @@ const FeaturedTours = ({
                                                 textDecoration: "line-through",
                                                 color: "text.secondary",
                                                 mb: 0.5,
-                                                fontSize: { xs: "0.75rem", md: "0.875rem" }
+                                                fontSize: {
+                                                    xs: "0.75rem",
+                                                    md: "0.875rem",
+                                                },
                                             }}
                                         >
                                             {Number(
@@ -444,24 +377,25 @@ const FeaturedTours = ({
                                             sx={{
                                                 fontWeight: "bold",
                                                 color: "success.main",
-                                                fontSize: { 
-                                                    xs: "1.1rem", 
-                                                    md: "1.3rem" 
+                                                fontSize: {
+                                                    xs: "1.1rem",
+                                                    md: "1.3rem",
                                                 },
                                             }}
                                         >
-                                            {Number(
-                                                tour.price
-                                            ).toLocaleString()}{" "}
-                                            VNĐ
+                                            {tour.price
+                                                ? `${Number(
+                                                      tour.price
+                                                  ).toLocaleString()} VNĐ`
+                                                : "Liên hệ"}
                                         </Typography>
                                     </Box>
                                 </Box>
                             </CardContent>
 
                             <CardActions
-                                sx={{ 
-                                    p: { xs: 1.5, md: 2 }, 
+                                sx={{
+                                    p: { xs: 1.5, md: 2 },
                                     pt: 0,
                                     flexDirection: { xs: "column", sm: "row" },
                                     gap: { xs: 1, sm: 0 },
@@ -481,7 +415,7 @@ const FeaturedTours = ({
                                         mr: { xs: 0, sm: 1 },
                                         width: { xs: "100%", sm: "auto" },
                                         fontSize: { xs: "0.85rem", md: "1rem" },
-                                        py: { xs: 1, md: 1.2 }
+                                        py: { xs: 1, md: 1.2 },
                                     }}
                                 >
                                     <span className="mobile-hidden sm-visible">

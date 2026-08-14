@@ -9,85 +9,25 @@ import {
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { HERO_TOUR_IDS, TOURS } from "../data/tours";
+
+const heroSlides = HERO_TOUR_IDS.map((id) => {
+    const tour = TOURS.find((item) => item.id === id);
+    if (!tour) return null;
+    return {
+        id: tour.id,
+        title: tour.title,
+        subtitle: `${tour.duration} • ${tour.location}`,
+        description: tour.description,
+        buttonText: "Xem lịch trình",
+        image: tour.image,
+        path: `/tours/${tour.id}`,
+    };
+}).filter(Boolean);
 
 const HeroCarousel = () => {
     const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
-
-    const heroSlides = [
-        {
-            id: 1,
-            title: "Khám phá Việt Nam",
-            subtitle:
-                "Trải nghiệm những chuyến du lịch Việt Nam tuyệt vời với các tour chất lượng cao",
-            buttonText: "Khám phá ngay",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            image: "https://images.pexels.com/photos/33599601/pexels-photo-33599601.jpeg",
-        },
-        {
-            id: 2,
-            title: "Vịnh Hạ Long Huyền Thoại",
-            subtitle:
-                "Chiêm ngưỡng kỳ quan thiên nhiên thế giới với hàng nghìn hòn đảo đá vôi",
-            buttonText: "Đặt tour ngay",
-            background: "linear-gradient(135deg, #2196F3 0%, #21CBF3 100%)",
-            image: "https://images.pexels.com/photos/58597/pexels-photo-58597.jpeg",
-        },
-        {
-            id: 3,
-            title: "Sapa Mờ Sương",
-            subtitle:
-                "Khám phá văn hóa dân tộc và ruộng bậc thang tuyệt đẹp tại cao nguyên Sapa",
-            buttonText: "Xem tour",
-            background: "linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%)",
-            image: "https://images.pexels.com/photos/6876737/pexels-photo-6876737.jpeg",
-        },
-        {
-            id: 4,
-            title: "Phú Quốc Đảo Ngọc",
-            subtitle:
-                "Thư giãn tại những bãi biển trong xanh và thưởng thức hải sản tươi ngon",
-            buttonText: "Nghỉ dưỡng",
-            background: "linear-gradient(135deg, #FF9800 0%, #FFC107 100%)",
-            image: "https://images.pexels.com/photos/33545/sunrise-phu-quoc-island-ocean.jpg",
-        },
-        {
-            id: 5,
-            title: "Bắc Kinh - Thủ Đô Ngàn Năm",
-            subtitle:
-                "Khám phá Tử Cấm Thành, Vạn Lý Trường Thành và văn hóa cổ xưa của Trung Hoa",
-            buttonText: "Khám phá Bắc Kinh",
-            background: "linear-gradient(135deg, #E91E63 0%, #F06292 100%)",
-            image: "https://images.pexels.com/photos/2846030/pexels-photo-2846030.jpeg",
-        },
-        {
-            id: 6,
-            title: "Thượng Hải - Thành Phố Hiện Đại",
-            subtitle:
-                "Trải nghiệm sự kết hợp hoàn hảo giữa truyền thống và hiện đại tại Thượng Hải",
-            buttonText: "Tour Thượng Hải",
-            background: "linear-gradient(135deg, #9C27B0 0%, #BA68C8 100%)",
-            image: "https://images.pexels.com/photos/33625670/pexels-photo-33625670.jpeg",
-        },
-        {
-            id: 7,
-            title: "Cửu Trại Câu - Tiên Cảnh Trần Gian",
-            subtitle:
-                "Chiêm ngưỡng vẻ đẹp tuyệt vời của hồ nước trong xanh và thác nước hùng vĩ",
-            buttonText: "Đến Cửu Trại Câu",
-            background: "linear-gradient(135deg, #00BCD4 0%, #4DD0E1 100%)",
-            image: "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/10/24/1411989/399216707_6478483805.jpg",
-        },
-        {
-            id: 8,
-            title: "Trương Gia Giới - Avatar Hallelujah",
-            subtitle:
-                "Khám phá những cột đá kỳ vĩ từng xuất hiện trong phim Avatar",
-            buttonText: "Phiêu lưu ngay",
-            background: "linear-gradient(135deg, #795548 0%, #A1887F 100%)",
-            image: "https://images.pexels.com/photos/6139687/pexels-photo-6139687.jpeg",
-        },
-    ];
 
     // Auto slide functionality
     useEffect(() => {
@@ -103,7 +43,7 @@ const HeroCarousel = () => {
     };
 
     const prevSlide = () => {
-        setCurrentSlide((prev) => 
+        setCurrentSlide((prev) =>
             prev === 0 ? heroSlides.length - 1 : prev - 1
         );
     };
@@ -116,13 +56,14 @@ const HeroCarousel = () => {
         <Box
             sx={{
                 position: "relative",
-                height: { xs: "100vh", md: "600px" },
+                height: {
+                    xs: "min(78vh, 560px)",
+                    sm: "min(72vh, 580px)",
+                    md: 560,
+                    lg: 600,
+                },
                 overflow: "hidden",
-                width: "100vw",
-                left: "50%",
-                right: "50%",
-                marginLeft: "-50vw",
-                marginRight: "-50vw",
+                width: "100%",
             }}
         >
             {/* Carousel Container */}
@@ -149,8 +90,10 @@ const HeroCarousel = () => {
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             opacity: index === currentSlide ? 1 : 0,
-                            visibility: index === currentSlide ? "visible" : "hidden",
-                            transition: "opacity 0.8s ease-in-out, visibility 0.8s ease-in-out",
+                            visibility:
+                                index === currentSlide ? "visible" : "hidden",
+                            transition:
+                                "opacity 0.8s ease-in-out, visibility 0.8s ease-in-out",
                             "&::before": {
                                 content: '""',
                                 position: "absolute",
@@ -163,83 +106,105 @@ const HeroCarousel = () => {
                             },
                         }}
                     >
-                                <Container
-                                maxWidth="lg"
-                                sx={{ 
-                                    position: "relative", 
-                                    zIndex: 2, 
-                                    userSelect: "none",
-                                    px: { xs: 2, sm: 3, md: 4 }
-                                }}
-                            >
-                                <Grid container spacing={4} alignItems="center">
-                                    <Grid item xs={12} md={8}>
-                                        <Typography
-                                            variant="h1"
-                                            component="h1"
-                                            gutterBottom
-                                            sx={{
-                                                fontWeight: "bold",
-                                                fontSize: {
-                                                    xs: "1.8rem",
-                                                    sm: "2.2rem",
-                                                    md: "3.5rem",
-                                                },
-                                                textShadow:
-                                                    "2px 2px 4px rgba(0,0,0,0.5)",
-                                                marginBottom: { xs: 1, md: 2 },
-                                                lineHeight: { xs: 1.2, md: 1.1 }
-                                            }}
-                                        >
-                                            {slide.title}
-                                        </Typography>
-                                        <Typography
-                                            variant="h5"
-                                            paragraph
-                                            sx={{
-                                                fontSize: {
-                                                    xs: "1rem",
-                                                    sm: "1.1rem",
-                                                    md: "1.5rem",
-                                                },
-                                                textShadow:
-                                                    "1px 1px 2px rgba(0,0,0,0.5)",
-                                                marginBottom: { xs: 2, md: 3 },
-                                                lineHeight: { xs: 1.4, md: 1.4 },
-                                                display: { xs: "none", sm: "block" }
-                                            }}
-                                        >
-                                            {slide.subtitle}
-                                        </Typography>
-                                        <Button
-                                            variant="contained"
-                                            size="large"
-                                            onClick={() => navigate("/tours")}
-                                            sx={{
-                                                backgroundColor:
-                                                    "rgba(255,255,255,0.9)",
-                                                color: "primary.main",
-                                                "&:hover": {
-                                                    backgroundColor: "white",
-                                                    transform:
-                                                        "translateY(-2px)",
-                                                    boxShadow:
-                                                        "0 8px 25px rgba(0,0,0,0.3)",
-                                                },
-                                                px: { xs: 2, md: 4 },
-                                                py: { xs: 1, md: 1.5 },
-                                                fontSize: { xs: "0.9rem", md: "1.1rem" },
-                                                fontWeight: "bold",
-                                                borderRadius: 2,
-                                                transition: "all 0.3s ease",
-                                            }}
-                                        >
-                                            {slide.buttonText}
-                                        </Button>
-                                    </Grid>
+                        <Container
+                            maxWidth="lg"
+                            sx={{
+                                position: "relative",
+                                zIndex: 2,
+                                userSelect: "none",
+                                px: { xs: 2, sm: 3, md: 4 },
+                                pt: { xs: 8, md: 2 },
+                                pb: { xs: 16, md: 2 },
+                            }}
+                        >
+                            <Grid container spacing={4} alignItems="center">
+                                <Grid size={{ xs: 12, md: 8 }}>
+                                    <Typography
+                                        variant="h1"
+                                        component="h1"
+                                        gutterBottom
+                                        sx={{
+                                            fontWeight: "bold",
+                                            fontSize: {
+                                                xs: "1.8rem",
+                                                sm: "2.2rem",
+                                                md: "3.5rem",
+                                            },
+                                            textShadow:
+                                                "2px 2px 4px rgba(0,0,0,0.5)",
+                                            marginBottom: { xs: 1, md: 2 },
+                                            lineHeight: { xs: 1.2, md: 1.1 },
+                                        }}
+                                    >
+                                        {slide.title}
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontSize: {
+                                                xs: "0.9rem",
+                                                md: "1.05rem",
+                                            },
+                                            fontWeight: 600,
+                                            opacity: 0.95,
+                                            mb: { xs: 1, md: 1.5 },
+                                            textShadow:
+                                                "1px 1px 2px rgba(0,0,0,0.5)",
+                                        }}
+                                    >
+                                        {slide.subtitle}
+                                    </Typography>
+                                    <Typography
+                                        paragraph
+                                        sx={{
+                                            fontSize: {
+                                                xs: "0.95rem",
+                                                sm: "1rem",
+                                                md: "1.15rem",
+                                            },
+                                            textShadow:
+                                                "1px 1px 2px rgba(0,0,0,0.5)",
+                                            marginBottom: { xs: 2, md: 3 },
+                                            lineHeight: 1.5,
+                                            maxWidth: 640,
+                                            display: {
+                                                xs: "none",
+                                                sm: "block",
+                                            },
+                                        }}
+                                    >
+                                        {slide.description}
+                                    </Typography>
+                                    <Button
+                                        variant="contained"
+                                        size="large"
+                                        onClick={() => navigate(slide.path)}
+                                        sx={{
+                                            backgroundColor:
+                                                "rgba(255,255,255,0.9)",
+                                            color: "primary.main",
+                                            "&:hover": {
+                                                backgroundColor: "white",
+                                                transform: "translateY(-2px)",
+                                                boxShadow:
+                                                    "0 8px 25px rgba(0,0,0,0.3)",
+                                            },
+                                            px: { xs: 2, md: 4 },
+                                            py: { xs: 1, md: 1.5 },
+                                            fontSize: {
+                                                xs: "0.9rem",
+                                                md: "1.1rem",
+                                            },
+                                            fontWeight: "bold",
+                                            borderRadius: 2,
+                                            transition: "all 0.3s ease",
+                                        }}
+                                    >
+                                        {slide.buttonText}
+                                    </Button>
                                 </Grid>
-                            </Container>
-                        </Box>
+                            </Grid>
+                        </Container>
+                    </Box>
                 ))}
             </Box>
 
@@ -247,6 +212,7 @@ const HeroCarousel = () => {
             <IconButton
                 onClick={prevSlide}
                 sx={{
+                    display: { xs: "none", md: "flex" },
                     position: "absolute",
                     left: { xs: 10, md: 20 },
                     top: "50%",
@@ -269,6 +235,7 @@ const HeroCarousel = () => {
             <IconButton
                 onClick={nextSlide}
                 sx={{
+                    display: { xs: "none", md: "flex" },
                     position: "absolute",
                     right: { xs: 10, md: 20 },
                     top: "50%",
@@ -291,12 +258,12 @@ const HeroCarousel = () => {
             {/* Pagination Dots */}
             <Box
                 sx={{
+                    display: { xs: "none", md: "flex" },
                     position: "absolute",
-                    bottom: { xs: 20, md: 30 },
+                    bottom: 30,
                     left: "50%",
                     transform: "translateX(-50%)",
-                    display: "flex",
-                    gap: { xs: 0.5, md: 1 },
+                    gap: 1,
                     zIndex: 10,
                 }}
             >
@@ -308,9 +275,10 @@ const HeroCarousel = () => {
                             width: { xs: 8, md: 12 },
                             height: { xs: 8, md: 12 },
                             borderRadius: "50%",
-                            backgroundColor: index === currentSlide 
-                                ? "white" 
-                                : "rgba(255,255,255,0.5)",
+                            backgroundColor:
+                                index === currentSlide
+                                    ? "white"
+                                    : "rgba(255,255,255,0.5)",
                             cursor: "pointer",
                             transition: "all 0.3s ease",
                             "&:hover": {

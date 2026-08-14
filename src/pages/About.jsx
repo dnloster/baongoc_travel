@@ -49,32 +49,33 @@ const About = () => {
     ];
 
     return (
-        <Container 
-            maxWidth="lg" 
-            sx={{ 
-                py: { xs: 2, md: 4 },
-                px: { xs: 1, sm: 2, md: 3 }
+        <Container
+            maxWidth="lg"
+            sx={{
+                    py: { xs: 3, md: 5 },
+                    px: { xs: 2, sm: 3 },
             }}
         >
             {/* Header */}
             <Box textAlign="center" sx={{ mb: { xs: 4, md: 6 } }}>
-                <Typography 
-                    variant="h3" 
-                    component="h1" 
+                <Typography
+                    variant="h3"
+                    component="h1"
                     gutterBottom
                     sx={{
                         fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
                         fontWeight: "bold",
-                        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                        background:
+                            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                         backgroundClip: "text",
-                        WebkitBackgroundClip: "text", 
+                        WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                     }}
                 >
                     Về chúng tôi
                 </Typography>
-                <Typography 
-                    variant="h6" 
+                <Typography
+                    variant="h6"
                     color="text.secondary"
                     sx={{
                         fontSize: { xs: "1rem", md: "1.25rem" },
@@ -87,10 +88,14 @@ const About = () => {
             </Box>
 
             {/* Company Story */}
-            <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mb: { xs: 4, md: 6 } }}>
-                <Grid item xs={12} md={6}>
-                    <Typography 
-                        variant="h4" 
+            <Grid
+                container
+                spacing={{ xs: 3, md: 4 }}
+                sx={{ mb: { xs: 4, md: 6 } }}
+            >
+                <Grid size={{ xs: 12, md: 6 }}>
+                    <Typography
+                        variant="h4"
                         gutterBottom
                         sx={{
                             fontSize: { xs: "1.5rem", md: "2.125rem" },
@@ -100,8 +105,8 @@ const About = () => {
                     >
                         Câu chuyện của chúng tôi
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         paragraph
                         sx={{
                             fontSize: { xs: "0.95rem", md: "1rem" },
@@ -115,8 +120,8 @@ const About = () => {
                         là việc di chuyển từ nơi này đến nơi khác, mà là cơ hội
                         để khám phá, học hỏi và tạo ra những kỷ niệm đẹp.
                     </Typography>
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         paragraph
                         sx={{
                             fontSize: { xs: "0.95rem", md: "1rem" },
@@ -131,7 +136,7 @@ const About = () => {
                         dịch vụ chất lượng cao với giá cả hợp lý.
                     </Typography>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Box
                         component="img"
                         sx={{
@@ -149,7 +154,7 @@ const About = () => {
 
             {/* Mission & Vision */}
             <Grid container spacing={4} sx={{ mb: 6 }}>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Card sx={{ height: "100%", p: 3 }}>
                         <Typography variant="h5" gutterBottom color="primary">
                             Sứ mệnh
@@ -162,7 +167,7 @@ const About = () => {
                         </Typography>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid size={{ xs: 12, md: 6 }}>
                     <Card sx={{ height: "100%", p: 3 }}>
                         <Typography variant="h5" gutterBottom color="primary">
                             Tầm nhìn
@@ -184,7 +189,7 @@ const About = () => {
                 </Typography>
                 <Grid container spacing={2} sx={{ mt: 2 }}>
                     {services.map((service, index) => (
-                        <Grid item xs={12} sm={6} md={4} key={index}>
+                        <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
                             <Card
                                 sx={{
                                     p: 2,
@@ -208,7 +213,7 @@ const About = () => {
                 </Typography>
                 <Grid container spacing={4} sx={{ mt: 2 }}>
                     {teamMembers.map((member, index) => (
-                        <Grid item xs={12} md={4} key={index}>
+                        <Grid size={{ xs: 12, md: 4 }} key={index}>
                             <Card sx={{ textAlign: "center", p: 3 }}>
                                 <Box
                                     component="img"
@@ -253,7 +258,7 @@ const About = () => {
                     Thông tin liên hệ
                 </Typography>
                 <Grid container spacing={4}>
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                         <List>
                             <ListItem>
                                 <ListItemIcon>
@@ -286,7 +291,7 @@ const About = () => {
                             </ListItem>
                         </List>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                         <List>
                             <ListItem>
                                 <ListItemIcon>
